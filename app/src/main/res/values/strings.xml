@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">DonorApp</string>
+    <string name="ic_power_settings_new_black_24dp">Logout</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="blood_text">Someone needs blood?</string>
+    <string name="city_selection">Select city</string>
+    <string name="notify">Notify</string>
+    <string name="blood_type">Select blood type</string>
+    <string name="qr_scan">Need to scan a QR Code, click scan button</string>
+    <string name="qr_scan_button">Scan</string>
+    <string name="regj_name">Register</string>
+    <string name="forgot_pass">Keni harruar fjalekalimin?</string>
+    <string name="edit_prof">Edit Profile</string>
+
+    <string-array name="blood_array">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>0+</item>
+        <item>0-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
+
+    <string-array name="country_array">
+        <item>BERAT</item>
+        <item>BULQIZË</item>
+        <item>DELVINË</item>
+        <item>DEVOLL</item>
+        <item>DIBËR</item>
+        <item>DURRËS</item>
+        <item>ELBASAN</item>
+        <item>FIER</item>
+        <item>GJIROKASTËR</item>
+        <item>GRAMSH</item>
+        <item>HAS</item>
+        <item>KAVAJË</item>
+        <item>KOLONJË</item>
+        <item>KORÇË</item>
+        <item>KRUJË</item>
+        <item>KUKËS</item>
+        <item>KURBIN</item>
+        <item>KUÇOVË</item>
+        <item>LEZHË</item>
+        <item>LIBRAZHD</item>
+        <item>LUSHNJE</item>
+        <item>MALLAKASTËR</item>
+        <item>MAT</item>
+        <item>MIRDITË</item>
+        <item>PEQIN</item>
+        <item>POGRADEC</item>
+        <item>PUKË</item>
+        <item>PËRMET</item>
+        <item>SARANDË</item>
+        <item>SHKODËR</item>
+        <item>SKRAPAR</item>
+        <item>TEPELENË</item>
+        <item>TIRANË</item>
+        <item>TROPOJË</item>
+        <item>VLORË</item>
+
+    </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

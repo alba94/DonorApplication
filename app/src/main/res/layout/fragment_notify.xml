@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".NotifyFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/navigationBarColor"
+        android:text="@string/blood_text"
+        android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/linar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/city_selection"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Spinner
+                android:id="@+id/spinner_city"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@array/country_array"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/blood_type"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1"/>
+
+            <Spinner
+                android:id="@+id/spinner_blood"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@array/blood_array"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/button_notify"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notify"
+        android:layout_marginBottom="60dp"
+        android:textColor="@color/textColorPrimary"
+        android:background="@drawable/button_style"/>
+
+    </LinearLayout>
+
