@@ -76,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<String> getAllCities() {
 
         List<String> userlist = new ArrayList<>();
-        String query = "SELECT * FROM " + TableName;
+        String query = "SELECT * FROM " + TableName + " group by " + KEY_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
