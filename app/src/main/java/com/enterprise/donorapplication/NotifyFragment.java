@@ -14,21 +14,29 @@ import android.widget.Toast;
 
 import com.enterprise.ServerAccess.LoginUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class NotifyFragment extends Fragment {
 
-    Spinner city_sp,blood_sp;
+    Spinner city_sp, blood_sp;
     Button msg;
-    String city_value="",blood_value="";
+    String city_value = "", blood_value = "";
     private LoginUtil loginUtil;
-    private boolean initializedView=true;
+    List<String> cities = new ArrayList<>();
+    DBHelper db;
+    private boolean initializedView = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        db = new DBHelper(getActivity());
+        cities = db.getAllCities();
+
         loginUtil = new LoginUtil(getActivity());
-        final View rootview = inflater.inflate(R.layout.fragment_notify,container,false);
+        final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
 
         city_sp = (Spinner) rootview.findViewById(R.id.spinner_city);
         blood_sp = (Spinner) rootview.findViewById(R.id.spinner_blood);
@@ -36,10 +44,10 @@ public class NotifyFragment extends Fragment {
         msg = (Button) rootview.findViewById(R.id.button_notify);
 
         //Spinner 1
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.country_array,android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         city_sp.setAdapter(adapter);
-        city_sp.setSelection(0,false);
+        city_sp.setSelection(0, false);
         city_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -59,7 +67,7 @@ public class NotifyFragment extends Fragment {
         });
 
         //Spinner 2
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(),R.array.blood_array,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.blood_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         blood_sp.setAdapter(adapter1);
         blood_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
