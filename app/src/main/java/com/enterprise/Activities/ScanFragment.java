@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 
 import android.os.Bundle;
@@ -8,19 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.enterprise.ServerAccess.LoginUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScanFragment extends Fragment  {
 
-    LoginUtil loginUtil;
     Button scanButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        loginUtil = new LoginUtil(getActivity());
         View rootview = inflater.inflate(R.layout.fragment_scan,container,false);
         scanButton = (Button) rootview.findViewById(R.id.button_scan);
 

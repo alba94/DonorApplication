@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 
 import android.support.v4.app.Fragment;

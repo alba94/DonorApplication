@@ -3,6 +3,9 @@ package com.enterprise.dagger;
 import android.app.Application;
 import android.content.Context;
 
+import com.enterprise.Session.SessionManager;
+import com.enterprise.Session.SessionManagerImpl;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -27,5 +30,10 @@ public class AppModule {
         return application;
     }
 
+    @Provides
+    @Singleton
+    SessionManager getSessionManager() {
+        return new SessionManagerImpl();
+    }
 
 }

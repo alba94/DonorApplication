@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.ServerAccess.LoginService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText _usernameText, _passwordText;
     Button _loginButton;
     TextView forgot_pass;
-    LoginUtil loginUtil;
+    LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
         _loginButton = (Button) findViewById(R.id.btn_login);
 
         forgot_pass = (TextView) findViewById(R.id.forgot_password);
-        loginUtil = new LoginUtil(getApplicationContext());
 
-        if (loginUtil.isLogined()) {
+        if (loginService.isLogined()) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
             startActivity(intent);
             finish();
@@ -114,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        String username, password;
+        String username;
+        String password;
 
         @Override
         protected void onPreExecute() {
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
-            return loginUtil.Login(username, password);
+            return loginService.Login(username, password);
         }
 
         @Override

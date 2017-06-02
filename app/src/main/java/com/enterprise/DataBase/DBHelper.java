@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.DataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

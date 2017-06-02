@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.ServerAccess.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -30,7 +30,7 @@ public class LoginedActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    private LoginUtil loginUtil;
+    private LoginService loginService;
     private int[] tabIcons = {
             R.drawable.ic_person_outline_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
@@ -45,9 +45,7 @@ public class LoginedActivity extends AppCompatActivity {
         setContentView(R.layout.logined);
 
 
-        loginUtil = new LoginUtil(getApplicationContext());
-
-        if (!loginUtil.isLogined()) {
+        if (!loginService.isLogined()) {
             this.logoutUser();
         }
 
@@ -140,7 +138,7 @@ public class LoginedActivity extends AppCompatActivity {
     }
 
     public void logoutUser() {
-        loginUtil.Logout();
+        loginService.Logout();
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to logout?")
                 .setCancelable(false)

@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 
 import android.os.Bundle;
@@ -10,7 +10,10 @@ import com.enterprise.Session.SessionManager;
 
 public class EditProfile extends AppCompatActivity {
 
-     EditText  nameEditText,phoneEditText, emailEditText;
+    EditText nameEditText;
+    EditText phoneEditText;
+    EditText emailEditText;
+
      SessionManager session;
 
 

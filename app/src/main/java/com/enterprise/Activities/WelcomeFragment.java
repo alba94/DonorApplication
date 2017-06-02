@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 
 import android.graphics.Color;
@@ -21,6 +21,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 
 public class WelcomeFragment extends Fragment {
 
@@ -29,6 +31,8 @@ public class WelcomeFragment extends Fragment {
     PieChart pie;
 
     TextView tv_view;
+
+    @Inject
     SessionManager session;
 
     @Override
@@ -38,7 +42,7 @@ public class WelcomeFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
         tv_view = (TextView) rootview.findViewById(R.id.username);
 
-        session = new SessionManager(this.getActivity());
+
         String name = session.getUsername();
         tv_view.setText("Welcome " + name);
 

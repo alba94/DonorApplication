@@ -1,6 +1,7 @@
 package com.enterprise.ServerAccess;
 
-import com.enterprise.OAuth.OAuthConstants;
+import com.enterprise.Utils.ConfigValues;
+import com.enterprise.Utils.Constants;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,15 +15,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static com.enterprise.OAuth.OAuthUtils.getAuthorizationHeaderForAccessToken;
+import static com.enterprise.Utils.AuthorizationUtil.getAuthorizationHeaderForAccessToken;
 
-public class DonationAccess{
+public class DonationServiceImpl implements DonationService {
 
-    public static boolean notifyDonor(String qrCode,String tokenfromSession)  {
+    public boolean notifyDonor(String qrCode, String tokenfromSession) {
 
-        String resourceURL = "https://mobileservices.herokuapp.com/mobileservices/data/";
+        String resourceURL = ConfigValues.BASE_URL + "/data/";
         HttpPost post = new HttpPost(resourceURL);
-        post.addHeader(OAuthConstants.AUTHORIZATION,
+        post.addHeader(Constants.AUTHORIZATION,
                 getAuthorizationHeaderForAccessToken(tokenfromSession));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");
@@ -55,10 +56,10 @@ public class DonationAccess{
         return false;
     }
 
-    public static boolean notifyArea(String city,String bloodType,String tokenfromSession)  {
-        String resourceURL = "https://mobileservices.herokuapp.com/mobileservices/areaNotify";
+    public boolean notifyArea(String city, String bloodType, String tokenfromSession) {
+        String resourceURL = ConfigValues.BASE_URL + "/areaNotify";
         HttpPost post = new HttpPost(resourceURL);
-        post.addHeader(OAuthConstants.AUTHORIZATION,
+        post.addHeader(Constants.AUTHORIZATION,
                 getAuthorizationHeaderForAccessToken(tokenfromSession));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");
@@ -95,12 +96,11 @@ public class DonationAccess{
         return false;
     }
 
+    public boolean monthlyReport(String bloodType, int nrDonors, int month, String tokenfromSession) {
+        String resourceURL = ConfigValues.BASE_URL + "/monthlyreport/";
 
-    public static boolean monthlyReport(String bloodType,int nrDonors,int month,String tokenfromSession)  {
-
-        String resourceURL = "https://mobileservices.herokuapp.com/mobileservices/monthlyreport/";
         HttpPost post = new HttpPost(resourceURL);
-        post.addHeader(OAuthConstants.AUTHORIZATION,
+        post.addHeader(Constants.AUTHORIZATION,
                 getAuthorizationHeaderForAccessToken(tokenfromSession));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");

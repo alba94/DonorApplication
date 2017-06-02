@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Activities;
 
 
 import android.os.Bundle;
@@ -12,22 +12,24 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.ServerAccess.LoginService;
+
 
 
 public class NotifyFragment extends Fragment {
 
-    Spinner city_sp,blood_sp;
+    Spinner city_sp;
+    Spinner blood_sp;
     Button msg;
-    String city_value="",blood_value="";
-    private LoginUtil loginUtil;
+    String city_value = "";
+    String blood_value = "";
+    private LoginService loginService;
     private boolean initializedView=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        loginUtil = new LoginUtil(getActivity());
         final View rootview = inflater.inflate(R.layout.fragment_notify,container,false);
 
         city_sp = (Spinner) rootview.findViewById(R.id.spinner_city);
@@ -84,7 +86,7 @@ public class NotifyFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
 
-               /* if(DonationAccess.notifyArea(city_value,blood_value,loginUtil.getToken()))
+               /* if(DonationAccess.notifyArea(city_value,blood_value,loginService.getToken()))
                 {
                     Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
                 }
