@@ -17,12 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginService;
+import com.enterprise.Services.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 public class LoginedActivity extends AppCompatActivity {
@@ -30,7 +32,9 @@ public class LoginedActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    private LoginService loginService;
+    @Inject
+    LoginService loginService;
+
     private int[] tabIcons = {
             R.drawable.ic_person_outline_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
@@ -138,7 +142,7 @@ public class LoginedActivity extends AppCompatActivity {
     }
 
     public void logoutUser() {
-        loginService.Logout();
+        loginService.logout();
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to logout?")
                 .setCancelable(false)

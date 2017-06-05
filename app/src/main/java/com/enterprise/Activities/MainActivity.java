@@ -14,12 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginService;
+import com.enterprise.Services.LoginService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.inject.Inject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     EditText _usernameText, _passwordText;
     Button _loginButton;
     TextView forgot_pass;
+
+    @Inject
     LoginService loginService;
 
     @Override
@@ -137,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
-            return loginService.Login(username, password);
+            return loginService.login(username, password);
         }
 
         @Override

@@ -4,13 +4,24 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.enterprise.dagger.ApplicationContext;
+import com.enterprise.dagger.DatabaseInfo;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Created by albal on 27/05/2017.
  */
 
+@Singleton
 public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+
+    @Inject
+    public DBHelper(@ApplicationContext Context context,
+                    @DatabaseInfo String dbName,
+                    @DatabaseInfo Integer version) {
+        super(context, dbName, null, version);
     }
 
     @Override

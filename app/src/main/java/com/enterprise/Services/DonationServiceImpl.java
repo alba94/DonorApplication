@@ -1,7 +1,10 @@
-package com.enterprise.ServerAccess;
+package com.enterprise.Services;
 
+import com.enterprise.Session.SessionManager;
 import com.enterprise.Utils.ConfigValues;
 import com.enterprise.Utils.Constants;
+import com.enterprise.requests.DonationCreateRequest;
+import com.enterprise.responses.Donation;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,17 +17,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import static com.enterprise.Utils.AuthorizationUtil.getAuthorizationHeaderForAccessToken;
 
 public class DonationServiceImpl implements DonationService {
 
-    public boolean notifyDonor(String qrCode, String tokenfromSession) {
+    @Inject
+    SessionManager sessionManager;
+
+
+    @Override
+    public Donation createDonation(DonationCreateRequest request) {
+        return null;
+    }
+
+    public boolean notifyDonor(String qrCode) {
 
         String resourceURL = ConfigValues.BASE_URL + "/data/";
         HttpPost post = new HttpPost(resourceURL);
         post.addHeader(Constants.AUTHORIZATION,
-                getAuthorizationHeaderForAccessToken(tokenfromSession));
+                getAuthorizationHeaderForAccessToken(sessionManager.getToken()));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");
         DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -56,11 +71,11 @@ public class DonationServiceImpl implements DonationService {
         return false;
     }
 
-    public boolean notifyArea(String city, String bloodType, String tokenfromSession) {
+    public boolean notifyArea(String city, String bloodType) {
         String resourceURL = ConfigValues.BASE_URL + "/areaNotify";
         HttpPost post = new HttpPost(resourceURL);
         post.addHeader(Constants.AUTHORIZATION,
-                getAuthorizationHeaderForAccessToken(tokenfromSession));
+                getAuthorizationHeaderForAccessToken(sessionManager.getToken()));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");
         DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -96,12 +111,12 @@ public class DonationServiceImpl implements DonationService {
         return false;
     }
 
-    public boolean monthlyReport(String bloodType, int nrDonors, int month, String tokenfromSession) {
+    public boolean monthlyReport(String bloodType, int nrDonors, int month) {
         String resourceURL = ConfigValues.BASE_URL + "/monthlyreport/";
 
         HttpPost post = new HttpPost(resourceURL);
         post.addHeader(Constants.AUTHORIZATION,
-                getAuthorizationHeaderForAccessToken(tokenfromSession));
+                getAuthorizationHeaderForAccessToken(sessionManager.getToken()));
         JSONObject jsonBody = new JSONObject();
         post.addHeader("Content-type", "application/json");
         DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -136,4 +151,8 @@ public class DonationServiceImpl implements DonationService {
     }
 
 
+    private Donation parseDonation(Map<String, Object> requestMap) {
+
+        return new Donation();
+    }
 }

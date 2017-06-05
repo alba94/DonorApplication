@@ -12,8 +12,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginService;
+import com.enterprise.Services.LoginService;
 
+import javax.inject.Inject;
 
 
 public class NotifyFragment extends Fragment {
@@ -23,7 +24,10 @@ public class NotifyFragment extends Fragment {
     Button msg;
     String city_value = "";
     String blood_value = "";
-    private LoginService loginService;
+
+    @Inject
+    LoginService loginService;
+
     private boolean initializedView=true;
 
     @Override

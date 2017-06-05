@@ -4,17 +4,53 @@ package com.enterprise.Session;
  * Created by Donald on 1/9/2017.
  */
 
-public interface SessionManager {
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
-    void setLogin(boolean isLoggedIn, String username, String access_token);
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-    void logout();
+@Singleton
+public class SessionManager {
 
-    boolean isLoggedIn();
+    private static String TAG = SessionManager.class.getSimpleName();
 
-    String getUsername();
+    private SharedPreferences sharedPreferences;
+    private Editor editor;
+    private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
-    String getToken();
+    @Inject
+    public SessionManager(SharedPreferences sharedPreferences) {
+        this.sharedPreferences = sharedPreferences;
+        editor = sharedPreferences.edit();
+    }
+
+    public void setLogin(boolean isLoggedIn, String username, String access_token) {
+        editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
+        editor.putString("username", username);
+        editor.putString("access_token", access_token);
+        editor.commit();
+        Log.d(TAG, "User login session modified!");
+    }
+
+    public void logout() {
+        editor.clear();
+        editor.commit();
+    }
+
+
+    public boolean isLoggedIn() {
+        return sharedPreferences.getBoolean(KEY_IS_LOGGEDIN, false);
+    }
+
+    public String getUsername() {
+        return sharedPreferences.getString("username", "null");
+    }
+
+    public String getToken() {
+        return sharedPreferences.getString("access_token", "null");
+    }
 
 
 }

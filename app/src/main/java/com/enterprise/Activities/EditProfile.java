@@ -8,13 +8,16 @@ import android.widget.EditText;
 
 import com.enterprise.Session.SessionManager;
 
+import javax.inject.Inject;
+
 public class EditProfile extends AppCompatActivity {
 
     EditText nameEditText;
     EditText phoneEditText;
     EditText emailEditText;
 
-     SessionManager session;
+    @Inject
+    SessionManager session;
 
 
     @Override

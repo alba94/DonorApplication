@@ -1,4 +1,4 @@
-package com.enterprise.ServerAccess;
+package com.enterprise.Services;
 
 /**
  * Created by dlika on 6/2/2017.
@@ -6,9 +6,9 @@ package com.enterprise.ServerAccess;
 
 public interface LoginService {
 
-    boolean Login(String username, String password);
+    boolean login(String username, String password);
 
-    void Logout();
+    void logout();
 
     boolean isLogined();
 

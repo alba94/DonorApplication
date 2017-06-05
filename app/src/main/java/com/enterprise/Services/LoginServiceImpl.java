@@ -1,23 +1,6 @@
-package com.enterprise.ServerAccess;
+package com.enterprise.Services;
 
 import com.enterprise.Session.SessionManager;
-import com.enterprise.Utils.AuthorizationUtil;
-import com.enterprise.Utils.ConfigValues;
-import com.enterprise.Utils.Constants;
-import com.enterprise.responses.Token;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -31,14 +14,14 @@ public class LoginServiceImpl implements LoginService {
     SessionManager sessionManager;
 
 
-    public boolean Login(String username,String password)
+    public boolean login(String username, String password)
     {
 
-/*
+
         sessionManager.setLogin(true,username,"tests");
-        return true;*/
+        return true;
 
-
+/*
         HttpPost post = new HttpPost(ConfigValues.BASE_URL + "/oauth/token");
         List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
         parametersBody.add(new BasicNameValuePair(Constants.GRANT_TYPE,
@@ -78,10 +61,10 @@ public class LoginServiceImpl implements LoginService {
         } catch (IOException e) {
         }
 
-        return false;
+        return false;*/
     }
 
-    public void Logout()
+    public void logout()
     {
        sessionManager.logout();
     }
