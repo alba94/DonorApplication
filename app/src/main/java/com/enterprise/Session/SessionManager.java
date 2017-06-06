@@ -1,9 +1,10 @@
-package com.enterprise.Session;
+package com.enterprise.session;
 
 /**
  * Created by Donald on 1/9/2017.
  */
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
@@ -21,8 +22,8 @@ public class SessionManager {
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
     @Inject
-    public SessionManager(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
+    public SessionManager(Context context) {
+        this.sharedPreferences = context.getSharedPreferences("mobilepref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 

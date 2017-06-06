@@ -1,4 +1,4 @@
-package com.enterprise.DataBase;
+package com.enterprise.dataBase;
 
 /**
  * Created by dlika on 6/2/2017.

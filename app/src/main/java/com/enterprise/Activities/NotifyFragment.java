@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 
 import android.os.Bundle;
@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.Services.LoginService;
+import com.enterprise.dagger.Injector;
+import com.enterprise.requests.AreaNotifyRequest;
+import com.enterprise.services.DonationService;
+import com.enterprise.services.LoginService;
 
 import javax.inject.Inject;
 
@@ -22,11 +25,13 @@ public class NotifyFragment extends Fragment {
     Spinner city_sp;
     Spinner blood_sp;
     Button msg;
-    String city_value = "";
-    String blood_value = "";
+    AreaNotifyRequest request;
 
     @Inject
     LoginService loginService;
+
+    @Inject
+    DonationService donationService;
 
     private boolean initializedView=true;
 
@@ -35,11 +40,13 @@ public class NotifyFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         final View rootview = inflater.inflate(R.layout.fragment_notify,container,false);
-
+        request = new AreaNotifyRequest();
         city_sp = (Spinner) rootview.findViewById(R.id.spinner_city);
         blood_sp = (Spinner) rootview.findViewById(R.id.spinner_blood);
 
         msg = (Button) rootview.findViewById(R.id.button_notify);
+
+        Injector.applicationComponent().inject(this);
 
         //Spinner 1
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.country_array,android.R.layout.simple_spinner_item);
@@ -52,8 +59,8 @@ public class NotifyFragment extends Fragment {
                 if (initializedView) {
                     initializedView = false;
                 } else {
-                    city_value = city_sp.getSelectedItem().toString();
-                    Toast.makeText(getActivity(), city_value, Toast.LENGTH_LONG).show();
+                    request.setCityName(city_sp.getSelectedItem().toString());
+                    Toast.makeText(getActivity(), request.getCityName(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -74,8 +81,8 @@ public class NotifyFragment extends Fragment {
                 if (initializedView) {
                     initializedView = false;
                 } else {
-                    blood_value = blood_sp.getSelectedItem().toString();
-                    Toast.makeText(getActivity(), blood_value, Toast.LENGTH_LONG).show();
+                    request.setBloodType(blood_sp.getSelectedItem().toString());
+                    Toast.makeText(getActivity(), request.getBloodType(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -90,14 +97,14 @@ public class NotifyFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
 
-               /* if(DonationAccess.notifyArea(city_value,blood_value,loginService.getToken()))
+                if (donationService.notifyArea(request))
                 {
                     Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     Toast.makeText(getActivity(), "A problem occurred,try again!", Toast.LENGTH_LONG).show();
-                } */
+                }
             }
         });
 

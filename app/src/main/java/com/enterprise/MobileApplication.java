@@ -1,14 +1,9 @@
 package com.enterprise;
 
 import android.app.Application;
-import android.content.Context;
 
-import com.enterprise.Session.SessionManager;
 import com.enterprise.dagger.cmp.ApplicationComponent;
 import com.enterprise.dagger.cmp.DaggerApplicationComponent;
-import com.enterprise.dagger.module.AppModule;
-
-import javax.inject.Inject;
 
 /**
  * Created by dlika on 6/2/2017.
@@ -16,26 +11,25 @@ import javax.inject.Inject;
 
 public class MobileApplication extends Application {
 
-    protected ApplicationComponent applicationComponent;
+    private static MobileApplication application;
 
-    @Inject
-    SessionManager sessionManager;
-
-    public static MobileApplication get(Context context) {
-        return (MobileApplication) context.getApplicationContext();
-    }
+    private static ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationComponent = DaggerApplicationComponent
-                .builder()
-                .appModule(new AppModule(this))
-                .build();
-        applicationComponent.inject(this);
+        application = this;
+        buildComponent();
     }
 
-    public ApplicationComponent getComponent() {
+    public static ApplicationComponent component() {
         return applicationComponent;
     }
+
+    public static void buildComponent() {
+        applicationComponent = DaggerApplicationComponent.Initializer.init(application);
+        applicationComponent.inject(application);
+    }
+
+
 }

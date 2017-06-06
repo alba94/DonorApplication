@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.Session.SessionManager;
+import com.enterprise.session.SessionManager;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -38,6 +38,8 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        session = new SessionManager(this.getContext());
 
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
         tv_view = (TextView) rootview.findViewById(R.id.username);

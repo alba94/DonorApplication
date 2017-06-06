@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 
 import android.os.Bundle;
@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
-import com.enterprise.Session.SessionManager;
+import com.enterprise.dagger.Injector;
+import com.enterprise.session.SessionManager;
 
 import javax.inject.Inject;
 
@@ -19,10 +20,10 @@ public class EditProfile extends AppCompatActivity {
     @Inject
     SessionManager session;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Injector.applicationComponent().inject(this);
         setContentView(R.layout.activity_edit_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -35,4 +36,6 @@ public class EditProfile extends AppCompatActivity {
         phoneEditText = (EditText) findViewById(R.id.phone);
         emailEditText = (EditText) findViewById(R.id.email);
     }
+
 }
+

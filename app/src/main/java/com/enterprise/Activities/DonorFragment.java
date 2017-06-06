@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 
 import android.support.v4.app.Fragment;

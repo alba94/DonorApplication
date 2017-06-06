@@ -1,13 +1,12 @@
 package com.enterprise.dagger.cmp;
 
-import android.app.Application;
-import android.content.Context;
 
-import com.enterprise.DataBase.DBHelper;
+import android.app.Application;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+
 import com.enterprise.MobileApplication;
-import com.enterprise.Session.SessionManager;
-import com.enterprise.dagger.ApplicationContext;
-import com.enterprise.dagger.module.AppModule;
+import com.enterprise.dagger.module.ApplicationModule;
 
 import javax.inject.Singleton;
 
@@ -18,18 +17,22 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
 
-    void inject(MobileApplication demoApplication);
+    void inject(AppCompatActivity activity);
 
-    @ApplicationContext
-    Context getContext();
+    void inject(Fragment fragment);
 
-    Application getApplication();
+    void inject(Application application);
 
-    SessionManager getSessionManager();
+    final class Initializer {
+        private Initializer() {
+        }
 
-    DBHelper getDBHelper();
-
+        public static ApplicationComponent init(MobileApplication app) {
+            return DaggerApplicationComponent.builder().
+                    applicationModule(new ApplicationModule(app)).build();
+        }
+    }
 }

@@ -1,26 +1,20 @@
-package com.enterprise.DataBase;
+package com.enterprise.dataBase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.enterprise.dagger.ApplicationContext;
-import com.enterprise.dagger.DatabaseInfo;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 /**
  * Created by albal on 27/05/2017.
  */
 
-@Singleton
+
 public class DBHelper extends SQLiteOpenHelper {
 
-    @Inject
-    public DBHelper(@ApplicationContext Context context,
-                    @DatabaseInfo String dbName,
-                    @DatabaseInfo Integer version) {
+
+    public DBHelper(Context context,
+                    String dbName,
+                     Integer version) {
         super(context, dbName, null, version);
     }
 

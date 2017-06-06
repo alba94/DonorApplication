@@ -1,14 +1,21 @@
-package com.enterprise.Services;
+package com.enterprise.services;
+
 
 import com.enterprise.responses.City;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 /**
  * Created by dlika on 6/5/2017.
  */
 
-public interface DataService {
+@Singleton
+public class DataService {
 
-    List<City> getAllCities();
+
+    public List<City> getAllCities() {
+        return null;
+    }
 }

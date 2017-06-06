@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.enterprise.Services.LoginService;
+import com.enterprise.dagger.Injector;
+import com.enterprise.services.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -32,6 +33,7 @@ public class LoginedActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+
     @Inject
     LoginService loginService;
 
@@ -47,8 +49,7 @@ public class LoginedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logined);
-
-
+        Injector.applicationComponent().inject(this);
         if (!loginService.isLogined()) {
             this.logoutUser();
         }

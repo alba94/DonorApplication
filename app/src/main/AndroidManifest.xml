@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enterprise.Activities">
+    package="com.enterprise.activities">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name="com.enterprise.Activities.MainActivity"
+            android:name="com.enterprise.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,20 +35,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.enterprise.Activities.LoginedActivity"
+            android:name="com.enterprise.activities.LoginedActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.enterprise.Activities.EditProfile"
+            android:name="com.enterprise.activities.EditProfile"
             android:label="@string/edit_prof"
-            android:parentActivityName="com.enterprise.Activities.LoginedActivity"
+            android:parentActivityName="com.enterprise.activities.LoginedActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.enterprise.Activities.LoginedActivity" />
+                android:value="com.enterprise.activities.LoginedActivity" />
         </activity>
 
     </application>

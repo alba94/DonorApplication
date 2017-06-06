@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

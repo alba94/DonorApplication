@@ -1,4 +1,4 @@
-package com.enterprise.Activities;
+package com.enterprise.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.Services.LoginService;
+import com.enterprise.MobileApplication;
+import com.enterprise.services.LoginService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -23,11 +24,22 @@ import java.net.URL;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText _usernameText, _passwordText;
+    @Bind(R.id.input_username)
+    EditText _usernameText;
+
+    @Bind(R.id.input_password)
+    EditText _passwordText;
+
+    @Bind(R.id.btn_login)
     Button _loginButton;
+
+    @Bind(R.id.forgot_password)
     TextView forgot_pass;
 
     @Inject
@@ -37,13 +49,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        _usernameText = (EditText) findViewById(R.id.input_username);
-        _passwordText = (EditText) findViewById(R.id.input_password);
-
-        _loginButton = (Button) findViewById(R.id.btn_login);
-
-        forgot_pass = (TextView) findViewById(R.id.forgot_password);
+        ButterKnife.bind(this);
+        MobileApplication.component().inject(this);
 
         if (loginService.isLogined()) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
