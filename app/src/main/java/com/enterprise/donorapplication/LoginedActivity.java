@@ -17,6 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.enterprise.Fragments.DonorFragment;
+import com.enterprise.Fragments.NotifyFragment;
+import com.enterprise.Fragments.ScanFragment;
+import com.enterprise.Fragments.WelcomeFragment;
 import com.enterprise.ServerAccess.LoginUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -32,7 +36,7 @@ public class LoginedActivity extends AppCompatActivity {
     ViewPager viewPager;
     private LoginUtil loginUtil;
     private int[] tabIcons = {
-            R.drawable.ic_person_outline_black_24dp,
+            R.drawable.ic_home_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
             R.drawable.ic_mail_outline_black_24dp,
             R.drawable.ic_people_black
@@ -58,7 +62,7 @@ public class LoginedActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(3);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -103,7 +107,7 @@ public class LoginedActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new WelcomeFragment(), "Welcome");
+        adapter.addFragment(new WelcomeFragment(), "Home");
         adapter.addFragment(new ScanFragment(), "Scan");
         adapter.addFragment(new NotifyFragment(), "Notify");
         adapter.addFragment(new DonorFragment(), "Donors");

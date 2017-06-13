@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.donorapplication.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScanFragment extends Fragment  {

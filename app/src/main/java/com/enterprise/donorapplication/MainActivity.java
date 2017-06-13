@@ -24,7 +24,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText _usernameText, _passwordText;
+    EditText _usernameText;
+    EditText _passwordText;
     Button _loginButton;
     TextView forgot_pass;
     LoginUtil loginUtil;

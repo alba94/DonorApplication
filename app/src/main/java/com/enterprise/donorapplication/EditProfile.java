@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
-import com.enterprise.Session.SessionManager;
-
 public class EditProfile extends AppCompatActivity {
 
-     EditText  nameEditText,phoneEditText, emailEditText;
-     SessionManager session;
+     EditText  nameEditText, emailEditText;
+
 
 
     @Override
@@ -26,7 +24,6 @@ public class EditProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameEditText = (EditText) findViewById(R.id.username);
-        phoneEditText = (EditText) findViewById(R.id.phone);
         emailEditText = (EditText) findViewById(R.id.email);
     }
 }

@@ -1,18 +1,40 @@
 <resources>
     <string name="app_name">DonorApp</string>
     <string name="ic_power_settings_new_black_24dp">Logout</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="blood_text">Someone needs blood?</string>
-    <string name="city_selection">Select city</string>
-    <string name="notify">Notify</string>
-    <string name="blood_type">Select blood type</string>
-    <string name="qr_scan">Need to scan a QR Code, click scan button</string>
-    <string name="qr_scan_button">Scan</string>
-    <string name="regj_name">Register</string>
+    <string name="usernamee">Emer Perdoruesi</string>
+    <string name="password">Fjalekalim</string>
+    <string name="retype_password">Rishkruaj Fjalekalimin</string>
+    <string name="sign_in">Logohu</string>
+    <string name="blood_text">Dikush ka nevoje per gjak?</string>
+    <string name="city_selection">Kliko qytetin</string>
+    <string name="notify">Dergo</string>
+    <string name="blood_type">Kliko grupin e gjakut</string>
+    <string name="qr_scan">Klikoni per te skanuar QR kodin</string>
+    <string name="qr_scan_button">Skano</string>
     <string name="forgot_pass">Keni harruar fjalekalimin?</string>
-    <string name="edit_prof">Edit Profile</string>
+    <string name="edit_prof">Modifiko Profilin</string>
+    <string name="dhuruesit">Lista of Dhuruesve</string>
+    <string name="home">Numri total i dhurimeve cdo muaj</string>
+
+
+    <string name="emer">Emri</string>
+    <string name="mbiemer">Mbiemri</string>
+    <string name="email">Email</string>
+    <string name="grup_gjaku">Grupi Gjakut</string>
+    <string name="ditelindja">Ditelindja DD/MM/YY</string>
+    <string name="qyteti">Qyteti</string>
+    <string name="adresa">Adresa</string>
+    <string name="telefon">Cel +355</string>
+    <string name="personal_num">Numri Personal</string>
+    <string name="shto_dhurim">Shto Dhurim</string>
+    <string name="save">Ruaj</string>
+
+
+
+
+
+
+
 
     <string-array name="blood_array">
         <item>A+</item>
@@ -69,5 +91,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_lala">lala</string>
 
 </resources>

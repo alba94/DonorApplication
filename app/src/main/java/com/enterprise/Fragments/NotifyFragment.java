@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Fragments;
 
 
 import android.os.Bundle;
@@ -13,9 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.enterprise.ServerAccess.LoginUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.enterprise.donorapplication.R;
 
 
 public class NotifyFragment extends Fragment {
@@ -23,17 +21,13 @@ public class NotifyFragment extends Fragment {
     Spinner city_sp, blood_sp;
     Button msg;
     String city_value = "", blood_value = "";
-    private LoginUtil loginUtil;
-    List<String> cities = new ArrayList<>();
-    DBHelper db;
+    LoginUtil loginUtil;
     private boolean initializedView = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        db = new DBHelper(getActivity());
-        cities = db.getAllCities();
 
         loginUtil = new LoginUtil(getActivity());
         final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
@@ -44,7 +38,7 @@ public class NotifyFragment extends Fragment {
         msg = (Button) rootview.findViewById(R.id.button_notify);
 
         //Spinner 1
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.country_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         city_sp.setAdapter(adapter);
         city_sp.setSelection(0, false);
@@ -70,6 +64,7 @@ public class NotifyFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.blood_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         blood_sp.setAdapter(adapter1);
+        blood_sp.setSelection(0, false);
         blood_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

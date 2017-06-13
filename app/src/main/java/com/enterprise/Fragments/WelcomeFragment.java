@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.Fragments;
 
 
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enterprise.Session.SessionManager;
+import com.enterprise.donorapplication.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;

@@ -14,9 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <meta-data
-        android:name="com.google.android.gms.vision.DEPENDENCIES"
-        android:value="barcode" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +21,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
@@ -37,10 +38,11 @@
             android:name=".LoginedActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".EditProfile"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".EditProfile"
             android:label="@string/edit_prof"
             android:parentActivityName=".LoginedActivity"
             android:screenOrientation="portrait">
@@ -49,6 +51,38 @@
                 android:value="com.enterprise.donorapplication.LoginedActivity" />
         </activity>
 
+        <activity
+            android:name=".DetailActivity"
+            android:label="Profili "
+            android:parentActivityName=".LoginedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.enterprise.donorapplication.LoginedActivity" />
+        </activity>
+
+        <activity
+            android:name=".AddDonor"
+            android:label="Shto Dhurues"
+            android:parentActivityName=".LoginedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.enterprise.donorapplication.LoginedActivity" />
+
+        </activity>
+        <activity
+            android:name=".NewDonation"
+            android:label="Shto Dhurim"
+            android:parentActivityName=".LoginedActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.enterprise.donorapplication.LoginedActivity" />
+
+        </activity>
     </application>
 
 </manifest>

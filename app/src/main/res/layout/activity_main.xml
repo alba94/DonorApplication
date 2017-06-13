@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_login"
                 android:drawablePadding="20dp"
-                android:hint="@string/username"
+                android:hint="@string/usernamee"
                 android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
@@ -74,8 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
             android:text="@string/forgot_pass"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
     </LinearLayout>
