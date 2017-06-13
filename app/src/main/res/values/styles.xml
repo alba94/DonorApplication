@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/textColorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
 
     </style>
 
@@ -27,7 +27,6 @@
     <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <!-- Customize color of navigation drawer icon and back arrow -->
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
 

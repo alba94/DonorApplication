@@ -39,7 +39,7 @@
             android:id="@+id/spinner_city"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:prompt="@array/country_array" />
 
@@ -65,7 +65,7 @@
             android:id="@+id/spinner_blood"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:prompt="@array/blood_array" />
 
@@ -78,7 +78,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_style"
         android:text="@string/notify"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/colorWhite" />
 
 </LinearLayout>
 

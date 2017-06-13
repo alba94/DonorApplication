@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">DonorApp</string>
-    <string name="ic_power_settings_new_black_24dp">Logout</string>
+    <string name="ic_power_settings_new_black_24dp">Dil</string>
     <string name="usernamee">Emer Perdoruesi</string>
     <string name="password">Fjalekalim</string>
     <string name="retype_password">Rishkruaj Fjalekalimin</string>
@@ -13,7 +13,7 @@
     <string name="qr_scan_button">Skano</string>
     <string name="forgot_pass">Keni harruar fjalekalimin?</string>
     <string name="edit_prof">Modifiko Profilin</string>
-    <string name="dhuruesit">Lista of Dhuruesve</string>
+    <string name="dhuruesit">Lista e Dhuruesve</string>
     <string name="home">Numri total i dhurimeve cdo muaj</string>
 
 

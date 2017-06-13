@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/button_style"
             android:text="@string/qr_scan_button" />
 

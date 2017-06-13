@@ -92,5 +92,5 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_style"
         android:text="@string/save"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/colorWhite" />
 </RelativeLayout>

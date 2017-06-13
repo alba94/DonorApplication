@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class NewDonation extends AppCompatActivity {
@@ -22,5 +23,10 @@ public class NewDonation extends AppCompatActivity {
         actualDate.setEnabled(false);
 
         nextDate = (EditText)findViewById(R.id.nextdate);
+        Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
+        cal.add(Calendar.MONTH, 6);
+        Date nextYear = cal.getTime();
+        
     }
 }

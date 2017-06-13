@@ -146,16 +146,16 @@ public class LoginedActivity extends AppCompatActivity {
     public void logoutUser() {
         loginUtil.Logout();
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to logout?")
+                .setMessage("Jeni i sigurt qe doni te dilni?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Po", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(LoginedActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Jo", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

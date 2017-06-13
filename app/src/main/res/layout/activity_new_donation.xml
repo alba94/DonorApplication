@@ -55,6 +55,6 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/button_style"
         android:text="Ruaj"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/colorWhite" />
 
 </RelativeLayout>
