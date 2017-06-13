@@ -14,15 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.MobileApplication;
+import com.enterprise.responses.Donor;
+import com.enterprise.services.DonorService;
 import com.enterprise.services.LoginService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,15 +41,16 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.forgot_password)
     TextView forgot_pass;
 
-    @Inject
     LoginService loginService;
+
+    DonorService donorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MobileApplication.component().inject(this);
+        loginService=new LoginService(getApplicationContext());
 
         if (loginService.isLogined()) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
@@ -66,7 +66,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+    private class DonorTask extends AsyncTask<Void, Void, Donor> {
+
+
+        @Override
+        protected Donor doInBackground(Void... voids) {
+            return  DonorService.getDonorById(1);
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+    }
+
 
     private class NetCheck extends AsyncTask<String, String, Boolean> {
         private ProgressDialog nDialog;
@@ -130,13 +147,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            _usernameText = (EditText) findViewById(R.id.input_username);
-            _passwordText = (EditText) findViewById(R.id.input_password);
-
             username = _usernameText.getText().toString();
             password = _passwordText.getText().toString();
-
             pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setTitle("Contacting Servers");
             pDialog.setMessage("Logging in ...");

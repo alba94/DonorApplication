@@ -9,21 +9,18 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-@Singleton
 public class SessionManager {
 
     private static String TAG = SessionManager.class.getSimpleName();
 
-    private SharedPreferences sharedPreferences;
+    private Context context;
+    private static SharedPreferences sharedPreferences;
     private Editor editor;
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
-    @Inject
     public SessionManager(Context context) {
-        this.sharedPreferences = context.getSharedPreferences("mobilepref", Context.MODE_PRIVATE);
+        this.context=context;
+        sharedPreferences = context.getSharedPreferences("mobilepref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
@@ -49,9 +46,17 @@ public class SessionManager {
         return sharedPreferences.getString("username", "null");
     }
 
-    public String getToken() {
+    public static String getToken() {
         return sharedPreferences.getString("access_token", "null");
     }
 
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
 }

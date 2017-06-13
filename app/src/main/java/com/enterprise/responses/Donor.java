@@ -128,6 +128,25 @@ public class Donor {
         this.city = city;
     }
 
+    @Override
+    public String toString() {
+        return "Donor{" +
+                "idblooddonor=" + idblooddonor +
+                ", address='" + address + '\'' +
+                ", birthday=" + birthday +
+                ", bllodtype='" + bllodtype + '\'' +
+                ", createdby=" + createdby +
+                ", createddate=" + createddate +
+                ", email='" + email + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", name='" + name + '\'' +
+                ", personalnumber='" + personalnumber + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", validity=" + validity +
+                ", city=" + city +
+                '}';
+    }
+
     private City city;
 
     public Integer getIdblooddonor() {

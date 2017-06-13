@@ -10,16 +10,19 @@ import android.widget.Button;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ScanFragment extends Fragment  {
 
+    @Bind(R.id.button_scan)
     Button scanButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        ButterKnife.bind(this, container);
         View rootview = inflater.inflate(R.layout.fragment_scan,container,false);
-        scanButton = (Button) rootview.findViewById(R.id.button_scan);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override

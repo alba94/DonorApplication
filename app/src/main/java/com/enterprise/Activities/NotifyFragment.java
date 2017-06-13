@@ -12,25 +12,34 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.dagger.Injector;
 import com.enterprise.requests.AreaNotifyRequest;
 import com.enterprise.services.DonationService;
 import com.enterprise.services.LoginService;
 
-import javax.inject.Inject;
+import org.robospring.RoboSpring;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class NotifyFragment extends Fragment {
 
+    @Bind(R.id.spinner_city)
     Spinner city_sp;
+
+    @Bind(R.id.spinner_blood)
     Spinner blood_sp;
+
+    @Bind(R.id.button_notify)
     Button msg;
+
     AreaNotifyRequest request;
 
-    @Inject
+    @Autowired
     LoginService loginService;
 
-    @Inject
+    @Autowired
     DonationService donationService;
 
     private boolean initializedView=true;
@@ -39,14 +48,11 @@ public class NotifyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        ButterKnife.bind(this,container);
+        RoboSpring.autowire(this);
+
         final View rootview = inflater.inflate(R.layout.fragment_notify,container,false);
         request = new AreaNotifyRequest();
-        city_sp = (Spinner) rootview.findViewById(R.id.spinner_city);
-        blood_sp = (Spinner) rootview.findViewById(R.id.spinner_blood);
-
-        msg = (Button) rootview.findViewById(R.id.button_notify);
-
-        Injector.applicationComponent().inject(this);
 
         //Spinner 1
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.country_array,android.R.layout.simple_spinner_item);

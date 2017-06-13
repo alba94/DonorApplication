@@ -19,9 +19,13 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import org.robospring.RoboSpring;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 
-import javax.inject.Inject;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class WelcomeFragment extends Fragment {
@@ -30,20 +34,19 @@ public class WelcomeFragment extends Fragment {
     private String[] words = {"A+", "A-", "AB+", "AB-", "B+", "B-", "0+", "0-"};
     PieChart pie;
 
+    @Bind(R.id.username)
     TextView tv_view;
 
-    @Inject
+    @Autowired
     SessionManager session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        session = new SessionManager(this.getContext());
-
+        ButterKnife.bind(this,container);
+        RoboSpring.autowire(this);
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
-        tv_view = (TextView) rootview.findViewById(R.id.username);
-
 
         String name = session.getUsername();
         tv_view.setText("Welcome " + name);

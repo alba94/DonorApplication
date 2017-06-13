@@ -1,4 +1,4 @@
-package com.enterprise.requests;
+package com.enterprise.responses;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by dlika on 6/2/2017.
  */
 
-public class DonationsPerMonthRequest {
+public class DonationsPerMonthResponse {
 
     private long donationsNumber;
 

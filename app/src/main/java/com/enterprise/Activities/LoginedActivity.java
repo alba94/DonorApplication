@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.enterprise.dagger.Injector;
 import com.enterprise.services.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -25,16 +24,21 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class LoginedActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.tabs)
     TabLayout tabLayout;
+
+    @Bind(R.id.viewpager)
     ViewPager viewPager;
 
-    @Inject
     LoginService loginService;
 
     private int[] tabIcons = {
@@ -49,21 +53,14 @@ public class LoginedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logined);
-        Injector.applicationComponent().inject(this);
+        ButterKnife.bind(this);
         if (!loginService.isLogined()) {
             this.logoutUser();
         }
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(2);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
     }

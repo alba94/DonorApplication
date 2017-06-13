@@ -1,8 +1,5 @@
-package com.enterprise.services;
+package com.enterprise.Utils;
 
-
-import com.enterprise.Utils.ConfigValues;
-import com.enterprise.Utils.Util;
 import com.enterprise.responses.City;
 
 import org.springframework.http.HttpMethod;
@@ -11,18 +8,19 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-
 /**
- * Created by dlika on 6/5/2017.
+ * Created by dlika on 6/8/2017.
  */
 
+public class RestClient {
 
-public class DataService {
+    private static RestTemplate restTemplate = Util.getRestTemplate();
 
-    RestTemplate restTemplate = Util.getRestTemplate();
 
-    public List<City> getAllCities() {
+    public static List<City> getAllCities() {
         ResponseEntity<List> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/cities/", HttpMethod.GET, null, List.class);
         return citiesResponse.getBody();
     }
+
+
 }
