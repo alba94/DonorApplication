@@ -7,7 +7,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:layout_marginTop="20dp"
-    tools:context="com.enterprise.donorapplication.AddDonor">
+    tools:context="com.enterprise.activities.AddDonor">
 
 
     <LinearLayout

@@ -9,8 +9,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.enterprise.donorapplication.CustomFilter;
-import com.enterprise.donorapplication.R;
+import com.enterprise.activities.CustomFilter;
+import com.enterprise.activities.R;
 import com.enterprise.responses.Donors;
 
 import java.util.ArrayList;

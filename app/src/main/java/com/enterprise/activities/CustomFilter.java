@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.activities;
 
 import android.widget.Filter;
 

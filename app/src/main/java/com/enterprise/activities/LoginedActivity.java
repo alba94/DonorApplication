@@ -1,4 +1,4 @@
-package com.enterprise.donorapplication;
+package com.enterprise.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,10 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.enterprise.Fragments.DonorFragment;
-import com.enterprise.Fragments.NotifyFragment;
-import com.enterprise.Fragments.ScanFragment;
-import com.enterprise.Fragments.WelcomeFragment;
+import com.enterprise.fragments.DonorFragment;
+import com.enterprise.fragments.NotifyFragment;
+import com.enterprise.fragments.ScanFragment;
+import com.enterprise.fragments.WelcomeFragment;
 import com.enterprise.services.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

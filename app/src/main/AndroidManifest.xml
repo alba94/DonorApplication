@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enterprise.donorapplication">
+    package="com.enterprise.activities">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -26,7 +26,7 @@
             android:value="barcode" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.enterprise.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,52 +35,52 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginedActivity"
+            android:name="com.enterprise.activities.LoginedActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".EditProfile"
+            android:name="com.enterprise.activities.EditProfile"
             android:label="@string/edit_prof"
-            android:parentActivityName=".LoginedActivity"
+            android:parentActivityName="com.enterprise.activities.LoginedActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.enterprise.donorapplication.LoginedActivity" />
+                android:value="com.enterprise.activities.LoginedActivity" />
         </activity>
 
         <activity
-            android:name=".DetailActivity"
+            android:name="com.enterprise.activities.DetailActivity"
             android:label="Profili "
-            android:parentActivityName=".LoginedActivity"
+            android:parentActivityName="com.enterprise.activities.LoginedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.enterprise.donorapplication.LoginedActivity" />
+                android:value="com.enterprise.activities.LoginedActivity" />
         </activity>
 
         <activity
-            android:name=".AddDonor"
+            android:name="com.enterprise.activities.AddDonor"
             android:label="Shto Dhurues"
-            android:parentActivityName=".LoginedActivity"
+            android:parentActivityName="com.enterprise.activities.LoginedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.enterprise.donorapplication.LoginedActivity" />
+                android:value="com.enterprise.activities.LoginedActivity" />
 
         </activity>
         <activity
-            android:name=".NewDonation"
+            android:name="com.enterprise.activities.NewDonation"
             android:label="Shto Dhurim"
-            android:parentActivityName=".LoginedActivity"
+            android:parentActivityName="com.enterprise.activities.LoginedActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.enterprise.donorapplication.LoginedActivity" />
+                android:value="com.enterprise.activities.LoginedActivity" />
 
         </activity>
     </application>

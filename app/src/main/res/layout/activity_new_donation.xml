@@ -6,7 +6,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:layout_marginBottom="10dp"
-    tools:context="com.enterprise.donorapplication.NewDonation">
+    tools:context="com.enterprise.activities.NewDonation">
 
     <LinearLayout
         android:layout_width="match_parent"

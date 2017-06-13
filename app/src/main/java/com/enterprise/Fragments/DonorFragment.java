@@ -1,4 +1,4 @@
-package com.enterprise.Fragments;
+package com.enterprise.fragments;
 
 
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.enterprise.activities.AddDonor;
+import com.enterprise.activities.DetailActivity;
+import com.enterprise.activities.R;
 import com.enterprise.adapter.DonorAdapter;
-import com.enterprise.donorapplication.AddDonor;
-import com.enterprise.donorapplication.DetailActivity;
-import com.enterprise.donorapplication.R;
 import com.enterprise.responses.DonorData;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.enterprise.Fragments;
+package com.enterprise.fragments;
 
 
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.donorapplication.R;
+import com.enterprise.activities.R;
 import com.enterprise.services.LoginService;
 
 import butterknife.Bind;
