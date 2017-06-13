@@ -1,4 +1,4 @@
-package com.enterprise.model;
+package com.enterprise.responses;
 
 import java.util.ArrayList;
 

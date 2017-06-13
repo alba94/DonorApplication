@@ -3,7 +3,7 @@ package com.enterprise.donorapplication;
 import android.widget.Filter;
 
 import com.enterprise.adapter.DonorAdapter;
-import com.enterprise.model.Donors;
+import com.enterprise.responses.Donors;
 
 import java.util.ArrayList;
 

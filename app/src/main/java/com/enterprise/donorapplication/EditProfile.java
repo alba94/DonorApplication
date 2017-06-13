@@ -8,13 +8,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class EditProfile extends AppCompatActivity {
 
+    @Bind(R.id.name)
     EditText nameEditText;
+
+    @Bind(R.id.lastname)
     EditText lastnameEditText;
+
+    @Bind(R.id.username)
     EditText usernameEditText;
+
+    @Bind(R.id.password)
     EditText passwordEditText;
+
+    @Bind(R.id.email)
     EditText emailEditText;
+
+    @Bind(R.id.button)
     Button ruaj_tedhenat;
 
 
@@ -22,6 +36,7 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        ButterKnife.bind(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,13 +44,7 @@ public class EditProfile extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nameEditText = (EditText) findViewById(R.id.name);
-        lastnameEditText = (EditText) findViewById(R.id.lastname);
-        usernameEditText = (EditText) findViewById(R.id.username);
-        passwordEditText = (EditText) findViewById(R.id.password);
-        emailEditText = (EditText) findViewById(R.id.email);
 
-        ruaj_tedhenat = (Button) findViewById(R.id.button);
         ruaj_tedhenat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

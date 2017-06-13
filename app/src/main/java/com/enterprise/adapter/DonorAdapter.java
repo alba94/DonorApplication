@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.enterprise.donorapplication.CustomFilter;
 import com.enterprise.donorapplication.R;
-import com.enterprise.model.Donors;
+import com.enterprise.responses.Donors;
 
 import java.util.ArrayList;
 

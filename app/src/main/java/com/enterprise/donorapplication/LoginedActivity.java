@@ -21,20 +21,29 @@ import com.enterprise.Fragments.DonorFragment;
 import com.enterprise.Fragments.NotifyFragment;
 import com.enterprise.Fragments.ScanFragment;
 import com.enterprise.Fragments.WelcomeFragment;
-import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.services.LoginService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class LoginedActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.tabs)
     TabLayout tabLayout;
+
+    @Bind(R.id.viewpager)
     ViewPager viewPager;
-    private LoginUtil loginUtil;
+
+    private LoginService loginService;
     private int[] tabIcons = {
             R.drawable.ic_home_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
@@ -47,24 +56,17 @@ public class LoginedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logined);
+        ButterKnife.bind(this);
 
+        loginService = new LoginService(getApplicationContext());
 
-        loginUtil = new LoginUtil(getApplicationContext());
-
-        if (!loginUtil.isLogined()) {
+        if (!loginService.isLogined()) {
             this.logoutUser();
         }
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(3);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
     }
@@ -144,7 +146,7 @@ public class LoginedActivity extends AppCompatActivity {
     }
 
     public void logoutUser() {
-        loginUtil.Logout();
+        loginService.logout();
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Jeni i sigurt qe doni te dilni?")
                 .setCancelable(false)

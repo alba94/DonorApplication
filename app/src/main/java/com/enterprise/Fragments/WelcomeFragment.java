@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.Session.SessionManager;
 import com.enterprise.donorapplication.R;
+import com.enterprise.session.SessionManager;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -22,14 +22,22 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class WelcomeFragment extends Fragment {
 
     private float[] data = {25.3f, 22.4f, 21.4f, 20.5f, 50.5f, 9.5f, 3.5f, 5.5f};
     private String[] words = {"A+", "A-", "AB+", "AB-", "B+", "B-", "0+", "0-"};
+
+    @Bind(R.id.pie_chart)
     PieChart pie;
 
+    @Bind(R.id.username)
     TextView tv_view;
+
+
     SessionManager session;
 
     @Override
@@ -37,14 +45,13 @@ public class WelcomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
-        tv_view = (TextView) rootview.findViewById(R.id.username);
 
+        ButterKnife.bind(this, rootview);
         session = new SessionManager(this.getActivity());
         String name = session.getUsername();
         tv_view.setText("Welcome " + name);
 
 
-        pie = (PieChart) rootview.findViewById(R.id.pie_chart);
         pie.setRotationEnabled(false);
         pie.setHoleRadius(20f);
         pie.setTransparentCircleAlpha(0);

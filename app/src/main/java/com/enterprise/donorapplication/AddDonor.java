@@ -6,18 +6,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class AddDonor extends AppCompatActivity {
 
+    @Bind(R.id.txt_emri)
     EditText emri;
+
+    @Bind(R.id.txt_mbiemri)
     EditText mbiemri;
+
+    @Bind(R.id.txt_email)
     EditText email;
+
+    @Bind(R.id.txt_bloodType)
     EditText gjaku;
+
+    @Bind(R.id.birthday)
     EditText ditelindja;
+
+    @Bind(R.id.txt_qyteti)
     EditText qyteti;
+
+    @Bind(R.id.txt_adresa)
     EditText adresa;
+
+    @Bind(R.id.txt_tel)
     EditText telefon;
+
+    @Bind(R.id.txt_personalNum)
     EditText personalNum;
+
+    @Bind(R.id.save)
     Button save;
+
     String t_ditelindja, t_emri, t_mbiemri, t_gjaku, t_qyteti, t_adresa, t_telefon, t_personal, t_email;
     
 
@@ -25,18 +48,7 @@ public class AddDonor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donor);
-
-        emri = (EditText) findViewById(R.id.txt_emri);
-        mbiemri = (EditText) findViewById(R.id.txt_mbiemri);
-        email = (EditText) findViewById(R.id.txt_email);
-        gjaku = (EditText) findViewById(R.id.txt_bloodType);
-        ditelindja = (EditText) findViewById(R.id.txt_birthday);
-        qyteti = (EditText) findViewById(R.id.txt_qyteti);
-        adresa = (EditText) findViewById(R.id.txt_adresa);
-        telefon = (EditText) findViewById(R.id.txt_tel);
-        personalNum = (EditText) findViewById(R.id.txt_personalNum);
-
-        save = (Button) findViewById(R.id.save);
+        ButterKnife.bind(this);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

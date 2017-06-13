@@ -1,4 +1,4 @@
-package com.enterprise.Session;
+package com.enterprise.session;
 
 /**
  * Created by Donald on 1/9/2017.
@@ -13,7 +13,7 @@ import android.util.Log;
 public class SessionManager {
 
     private static String TAG = SessionManager.class.getSimpleName();
-    SharedPreferences pref;
+    static SharedPreferences pref;
     private Editor editor;
     private Context _context;
     int PRIVATE_MODE = 0;
@@ -50,7 +50,8 @@ public class SessionManager {
     {
         return pref.getString("username","null");
     }
-    public String getToken()
+
+    public static String getToken()
     {
         return pref.getString("access_token","null");
     }

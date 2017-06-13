@@ -16,14 +16,22 @@ import com.enterprise.adapter.DonorAdapter;
 import com.enterprise.donorapplication.AddDonor;
 import com.enterprise.donorapplication.DetailActivity;
 import com.enterprise.donorapplication.R;
-import com.enterprise.model.DonorData;
+import com.enterprise.responses.DonorData;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCallback {
 
+    @Bind(R.id.recycler_lists)
     RecyclerView recyclerView;
+
+    @Bind(R.id.search_donor)
     SearchView search;
+
+
     public DonorAdapter adapter;
     ArrayList listData;
 
@@ -31,10 +39,10 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.activity_question_lists, container, false);
+        ButterKnife.bind(this, rootview);
 
         listData = (ArrayList) DonorData.getListData();
 
-        recyclerView = (RecyclerView) rootview.findViewById(R.id.recycler_lists);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setNestedScrollingEnabled(true);
         adapter = new DonorAdapter(DonorData.getListData(), getActivity());

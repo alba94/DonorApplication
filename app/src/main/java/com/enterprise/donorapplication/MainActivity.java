@@ -14,36 +14,42 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginUtil;
+import com.enterprise.services.LoginService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    @Bind(R.id.input_username)
     EditText _usernameText;
+
+    @Bind(R.id.input_password)
     EditText _passwordText;
+
+    @Bind(R.id.btn_login)
     Button _loginButton;
+
+    @Bind(R.id.forgot_password)
     TextView forgot_pass;
-    LoginUtil loginUtil;
+
+    LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        _usernameText = (EditText) findViewById(R.id.input_username);
-        _passwordText = (EditText) findViewById(R.id.input_password);
+        loginService = new LoginService(getApplicationContext());
 
-        _loginButton = (Button) findViewById(R.id.btn_login);
-
-        forgot_pass = (TextView) findViewById(R.id.forgot_password);
-        loginUtil = new LoginUtil(getApplicationContext());
-
-        if (loginUtil.isLogined()) {
+        if (loginService.isLogined()) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
             startActivity(intent);
             finish();
@@ -138,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
-            return loginUtil.Login(username, password);
+            return loginService.login(username, password);
         }
 
         @Override

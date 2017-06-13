@@ -1,4 +1,4 @@
-package com.enterprise.model;
+package com.enterprise.responses;
 
 /**
  * Created by albal on 28/03/2017.

@@ -12,30 +12,38 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.enterprise.ServerAccess.LoginUtil;
 import com.enterprise.donorapplication.R;
+import com.enterprise.services.LoginService;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class NotifyFragment extends Fragment {
 
-    Spinner city_sp, blood_sp;
+    @Bind(R.id.spinner_city)
+    Spinner city_sp;
+
+    @Bind(R.id.spinner_blood)
+    Spinner blood_sp;
+
+    @Bind(R.id.button_notify)
     Button msg;
+
     String city_value = "", blood_value = "";
-    LoginUtil loginUtil;
+
+    LoginService loginService;
+
     private boolean initializedView = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        loginUtil = new LoginUtil(getActivity());
         final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
+        ButterKnife.bind(this, rootview);
+        loginService = new LoginService(getActivity());
 
-        city_sp = (Spinner) rootview.findViewById(R.id.spinner_city);
-        blood_sp = (Spinner) rootview.findViewById(R.id.spinner_blood);
-
-        msg = (Button) rootview.findViewById(R.id.button_notify);
 
         //Spinner 1
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.country_array, android.R.layout.simple_spinner_item);
