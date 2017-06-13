@@ -12,7 +12,15 @@ import android.widget.EditText;
 
 public class DetailActivity extends AppCompatActivity {
 
-    EditText emri, mbiemri, email, gjaku, ditelindja, qyteti, adresa, telefon, personalNum;
+    EditText emri;
+    EditText mbiemri;
+    EditText email;
+    EditText gjaku;
+    EditText ditelindja;
+    EditText qyteti;
+    EditText adresa;
+    EditText telefon;
+    EditText personalNum;
     Button add;
 
 

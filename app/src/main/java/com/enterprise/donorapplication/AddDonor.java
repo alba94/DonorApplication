@@ -8,9 +8,18 @@ import android.widget.EditText;
 
 public class AddDonor extends AppCompatActivity {
 
-    EditText emri, mbiemri, email, gjaku, ditelindja, qyteti, adresa, telefon, personalNum;
+    EditText emri;
+    EditText mbiemri;
+    EditText email;
+    EditText gjaku;
+    EditText ditelindja;
+    EditText qyteti;
+    EditText adresa;
+    EditText telefon;
+    EditText personalNum;
     Button save;
     String t_ditelindja, t_emri, t_mbiemri, t_gjaku, t_qyteti, t_adresa, t_telefon, t_personal, t_email;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
