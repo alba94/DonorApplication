@@ -5,7 +5,6 @@ import android.content.Context;
 import com.enterprise.Utils.ConfigValues;
 import com.enterprise.Utils.Constants;
 import com.enterprise.Utils.Util;
-import com.enterprise.responses.Token;
 import com.enterprise.session.SessionManager;
 
 import org.apache.http.HttpResponse;
@@ -42,12 +41,6 @@ public class LoginService {
 
 
     public boolean login(String username, String password) {
-
-//        String url =ConfigValues.BASE_URL+"/oauth/token";
-//        Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
-//        uriBuilder.appendQueryParameter("username", username);
-//        uriBuilder.appendQueryParameter("password", password);
-
         HttpPost post = new HttpPost(ConfigValues.BASE_URL + "/oauth/token");
         List<BasicNameValuePair> parametersBody = new ArrayList<BasicNameValuePair>();
         parametersBody.add(new BasicNameValuePair(Constants.GRANT_TYPE,
@@ -65,10 +58,8 @@ public class LoginService {
             parametersBody.add(new BasicNameValuePair(
                     Constants.CLIENT_SECRET, ConfigValues.CLIENT_SECRET));
         }
-
         DefaultHttpClient client = new DefaultHttpClient();
         HttpResponse response = null;
-        Token accessToken = null;
         try {
             post.addHeader(
                     Constants.AUTHORIZATION,
@@ -86,7 +77,6 @@ public class LoginService {
         } catch (ClientProtocolException e) {
         } catch (IOException e) {
         }
-
         return false;
     }
 

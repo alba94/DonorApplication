@@ -1,6 +1,9 @@
 package com.enterprise.services;
 
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.enterprise.Utils.ConfigValues;
 import com.enterprise.Utils.Util;
 import com.enterprise.responses.City;
@@ -10,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -19,10 +23,23 @@ import java.util.List;
 
 public class DataService {
 
-    RestTemplate restTemplate = Util.getRestTemplate();
+    static RestTemplate restTemplate = Util.getRestTemplate();
 
-    public List<City> getAllCities() {
-        ResponseEntity<List> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/cities/", HttpMethod.GET, null, List.class);
-        return citiesResponse.getBody();
+    public static List<City> getAllCities() {
+        try {
+            return new AsyncTask<String, String, List<City>>() {
+                @Override
+                protected List<City> doInBackground(String... strings) {
+                    ResponseEntity<List> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/cities/", HttpMethod.GET, null, List.class);
+                    return citiesResponse.getBody();
+                }
+            }.execute().get();
+        } catch (InterruptedException e) {
+            Log.d("Error loading", e.getMessage());
+
+        } catch (ExecutionException e) {
+            Log.d("Error loading", e.getMessage());
+        }
+        return null;
     }
 }

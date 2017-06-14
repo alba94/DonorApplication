@@ -1,5 +1,8 @@
 package com.enterprise.services;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.enterprise.Utils.ConfigValues;
 import com.enterprise.Utils.Util;
 import com.enterprise.requests.AreaNotifyRequest;
@@ -10,16 +13,29 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class DonationService {
 
-    RestTemplate restTemplate = Util.getRestTemplate();
+    static RestTemplate restTemplate = Util.getRestTemplate();
 
-    public Donation createDonation(DonationCreateRequest request) {
-        HttpEntity<DonationCreateRequest> requestEntity = new HttpEntity<DonationCreateRequest>(request, Util.getHeaders());
-        Donation donation = restTemplate.postForObject(ConfigValues.BASE_URL + "/donations/", request, Donation.class);
-        return donation;
+    public static Donation createDonation(final DonationCreateRequest request) {
+        try {
+            return new AsyncTask<Boolean, Boolean, Donation>() {
+                @Override
+                protected Donation doInBackground(Boolean... booleen) {
+                    HttpEntity<DonationCreateRequest> requestEntity = new HttpEntity<DonationCreateRequest>(request, Util.getHeaders());
+                    Donation donation = restTemplate.postForObject(ConfigValues.BASE_URL + "/donations/", request, Donation.class);
+                    return donation;
+                }
+            }.execute().get();
+        } catch (InterruptedException e) {
+            Log.d("Error loading", e.getMessage());
+        } catch (ExecutionException e) {
+            Log.d("Error loading", e.getMessage());
+        }
+        return null;
     }
 
     public boolean notifyDonor(String qrCode) {

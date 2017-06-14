@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         _loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (validate()) {
-                    NetAsync(view);
+                    new NetCheck().execute();
                 }
             }
         });
@@ -166,11 +166,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    public void NetAsync(View view) {
-        new NetCheck().execute();
-    }
-
 
     public boolean validate() {
         boolean valid = true;

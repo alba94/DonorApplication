@@ -27,11 +27,10 @@ public class SessionManager {
     }
 
 
-    public void setLogin(boolean isLoggedIn,String username,String access_token) {
-
+    public void setLogin(boolean isLoggedIn, String username, String token) {
         editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
         editor.putString("username",username);
-        editor.putString("access_token",access_token);
+        editor.putString("access_token", token);
         editor.commit();
         Log.d(TAG, "User login session modified!");
     }

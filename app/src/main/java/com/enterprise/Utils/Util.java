@@ -1,6 +1,12 @@
 package com.enterprise.Utils;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 
 import com.enterprise.session.SessionManager;
 
@@ -19,12 +25,16 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by dlika on 6/5/2017.
@@ -52,74 +62,53 @@ public class Util {
         headers.add("Content-Type", "application/json");
         return headers;
     }
-//    private  class NetCheck extends AsyncTask<String, String, Boolean> {
-//        private ProgressDialog nDialog;
-//        private Context context;
-//
-//        public NetCheck(Context context)
-//        {
-//            this.context=context;
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            nDialog = new ProgressDialog(MainActivity.this);
-//            nDialog.setTitle("Checking Network");
-//            nDialog.setMessage("Loading..");
-//            nDialog.setIndeterminate(false);
-//            nDialog.setCancelable(true);
-//            nDialog.show();
-//        }
-//
-//        @Override
-//        protected Boolean doInBackground(String... args) {
-//
-//            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//
-//            if (netInfo != null && netInfo.isConnected()) {
-//                try {
-//                    URL url = new URL("http://www.google.com");
-//                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-//                    urlc.setConnectTimeout(3000);
-//                    urlc.connect();
-//                    if (urlc.getResponseCode() == 200) {
-//                        return true;
-//                    }
-//                } catch (MalformedURLException e1) {
-//
-//                } catch (IOException e) {
-//
-//                }
-//            }
-//            return false;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Boolean th) {
-//
-//            if (th) {
-//                nDialog.dismiss();
-//            } else {
-//                nDialog.dismiss();
-//                Toast.makeText(context,"Error in Network Connection", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//
-//
-//    public boolean checkConnection(Context context)
-//    {
-//        try {
-//            return new NetCheck(context).execute().get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+
+    public static boolean checkForNet(final Context context) {
+        try {
+            return new AsyncTask<String, String, Boolean>() {
+                ProgressDialog nDialog;
+
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    nDialog = new ProgressDialog(context);
+                    nDialog.setTitle("Checking Network");
+                    nDialog.setMessage("Loading..");
+                    nDialog.setIndeterminate(false);
+                    nDialog.setCancelable(true);
+                    nDialog.show();
+                }
+
+                protected Boolean doInBackground(String... args) {
+
+                    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                    if (netInfo != null && netInfo.isConnected()) {
+                        try {
+                            URL url = new URL("http://www.google.com");
+                            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                            urlc.setConnectTimeout(3000);
+                            urlc.connect();
+                            if (urlc.getResponseCode() == 200) {
+                                return true;
+                            }
+                        } catch (MalformedURLException e1) {
+
+                        } catch (IOException e) {
+
+                        }
+                    }
+                    return false;
+                }
+
+
+            }.execute().get();
+        } catch (InterruptedException e) {
+            Log.d("Error", e.getMessage());
+        } catch (ExecutionException e) {
+            Log.d("Error", e.getMessage());
+        }
+        return false;
+    }
 
 
     public static Map handleResponse(HttpResponse response) {
