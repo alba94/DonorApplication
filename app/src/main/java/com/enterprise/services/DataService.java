@@ -8,6 +8,7 @@ import com.enterprise.Utils.ConfigValues;
 import com.enterprise.Utils.Util;
 import com.enterprise.responses.City;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -30,8 +31,9 @@ public class DataService {
             return new AsyncTask<String, String, List<City>>() {
                 @Override
                 protected List<City> doInBackground(String... strings) {
-                    ResponseEntity<List> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/cities/", HttpMethod.GET, null, List.class);
-                    return citiesResponse.getBody();
+                    ResponseEntity<List<City>> lista = restTemplate.exchange(ConfigValues.BASE_URL + "/cities/", HttpMethod.GET, null, new ParameterizedTypeReference<List<City>>() {
+                    });
+                    return lista.getBody();
                 }
             }.execute().get();
         } catch (InterruptedException e) {

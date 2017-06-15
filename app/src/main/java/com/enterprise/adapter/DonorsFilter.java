@@ -1,22 +1,22 @@
-package com.enterprise.activities;
+package com.enterprise.adapter;
 
 import android.widget.Filter;
 
-import com.enterprise.adapter.DonorAdapter;
-import com.enterprise.responses.Donors;
+import com.enterprise.responses.Donor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by albal on 07/06/2017.
  */
 
-public class CustomFilter extends Filter {
+public class DonorsFilter extends Filter {
 
     private DonorAdapter adapter;
-    private ArrayList<Donors> filterList;
+    private List<Donor> filterList;
 
-    public CustomFilter(ArrayList<Donors> filterList, DonorAdapter adapter) {
+    public DonorsFilter(List<Donor> filterList, DonorAdapter adapter) {
         this.adapter = adapter;
         this.filterList = filterList;
     }
@@ -29,11 +29,10 @@ public class CustomFilter extends Filter {
 
             constraint = constraint.toString().toUpperCase();
 
-            ArrayList<Donors> filteredDonors = new ArrayList<>();
+            List<Donor> filteredDonors = new ArrayList<>();
             for (int i = 0; i < filterList.size(); i++) {
 
-                if (filterList.get(i).getQuestion().toUpperCase().contains(constraint) || filterList.get(i).getCity().toUpperCase().contains(constraint) || filterList.get(i).getBloodType().toUpperCase().contains(constraint)) {
-
+                if (filterList.get(i).getName().toUpperCase().contains(constraint)) {
                     filteredDonors.add(filterList.get(i));
                 }
             }
@@ -48,7 +47,7 @@ public class CustomFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
-        adapter.quest = (ArrayList<Donors>) results.values;
+        adapter.quest = (List<Donor>) results.values;
         adapter.notifyDataSetChanged();
     }
 }

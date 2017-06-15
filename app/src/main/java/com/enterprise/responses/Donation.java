@@ -1,11 +1,14 @@
 package com.enterprise.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 /**
  * Created by dlika on 6/5/2017.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Donation {
 
 

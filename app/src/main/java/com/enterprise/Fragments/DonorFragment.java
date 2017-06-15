@@ -16,9 +16,7 @@ import com.enterprise.activities.AddDonor;
 import com.enterprise.activities.DetailActivity;
 import com.enterprise.activities.R;
 import com.enterprise.adapter.DonorAdapter;
-import com.enterprise.responses.DonorData;
-
-import java.util.ArrayList;
+import com.enterprise.services.DonorService;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,21 +29,17 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     @Bind(R.id.search_donor)
     SearchView search;
 
-
     public DonorAdapter adapter;
-    ArrayList listData;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.activity_question_lists, container, false);
         ButterKnife.bind(this, rootview);
-
-        listData = (ArrayList) DonorData.getListData();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setNestedScrollingEnabled(true);
-        adapter = new DonorAdapter(DonorData.getListData(), getActivity());
+        adapter = new DonorAdapter(DonorService.getAllDonors(), getActivity());
         recyclerView.setAdapter(adapter);
         adapter.setItemClickCallback(this);
 

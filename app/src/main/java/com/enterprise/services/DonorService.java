@@ -9,6 +9,7 @@ import com.enterprise.requests.DonorCreateRequest;
 import com.enterprise.requests.DonorSearchFilterRequest;
 import com.enterprise.responses.Donor;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,8 @@ public class DonorService {
             return new AsyncTask<Boolean, Boolean, List<Donor>>() {
                 @Override
                 protected List<Donor> doInBackground(Boolean... booleen) {
-                    ResponseEntity<List> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/donors/", HttpMethod.GET, null, List.class);
+                    ResponseEntity<List<Donor>> citiesResponse = restTemplate.exchange(ConfigValues.BASE_URL + "/donors/", HttpMethod.GET, null, new ParameterizedTypeReference<List<Donor>>() {
+                    });
                     return citiesResponse.getBody();
                 }
             }.execute().get();

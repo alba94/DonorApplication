@@ -1,9 +1,12 @@
 package com.enterprise.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by dlika on 6/2/2017.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Token {
 
     private final Long expiresIn;
