@@ -13,11 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.enterprise.activities.R;
-import com.enterprise.database.DBHelper;
-import com.enterprise.responses.City;
 import com.enterprise.services.LoginService;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,8 +33,8 @@ public class NotifyFragment extends Fragment {
     String city_value = "", blood_value = "";
 
     LoginService loginService;
-    List<City> cities;
-    DBHelper db;
+
+
 
     private boolean initializedView = true;
 
@@ -50,11 +46,11 @@ public class NotifyFragment extends Fragment {
         ButterKnife.bind(this, rootview);
         loginService = new LoginService(getActivity());
 
-        db = new DBHelper(getActivity());
-        cities = db.displayCities();
 
 
-        //Spinner 1
+
+
+     /*   //Spinner 1
         ArrayAdapter<City> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         city_sp.setAdapter(adapter);
@@ -75,7 +71,7 @@ public class NotifyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        }); */
 
         //Spinner 2
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.blood_array, android.R.layout.simple_spinner_item);

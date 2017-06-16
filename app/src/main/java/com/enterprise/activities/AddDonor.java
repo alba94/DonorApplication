@@ -2,7 +2,6 @@ package com.enterprise.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -67,14 +66,11 @@ public class AddDonor extends AppCompatActivity {
                 t_telefon = telefon.getText().toString();
                 t_personal = personalNum.getText().toString();
 
-                if (isTextBad(t_emri, t_mbiemri, t_telefon, t_email, t_adresa, t_personal)) {
-                    Toast.makeText(getApplicationContext(), "K", Toast.LENGTH_SHORT).show();
 
-                } else {
 
-                    newDonor();
-                    Toast.makeText(getApplicationContext(), "Dhuruesi u krijua me sukses!", Toast.LENGTH_SHORT).show();
-                }
+                newDonor();
+                Toast.makeText(getApplicationContext(), "Dhuruesi u krijua me sukses!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -92,41 +88,4 @@ public class AddDonor extends AppCompatActivity {
         DonorService.createDonor(donor);
     }
 
-    public boolean isTextBad(String name, String lasname, String phone, String email, String adresa, String personalNum) {
-        boolean flag = false;
-        if (name == null || name.length() == 0 || name.length() < 2) {
-            flag = true;
-            Toast.makeText(this, "Emri smund te jete bosh",
-                    Toast.LENGTH_LONG).show();
-        }
-        if (lasname == null || lasname.length() == 0 || lasname.length() < 2) {
-            flag = true;
-            Toast.makeText(this, "Mbiemri smund te jete bosh",
-                    Toast.LENGTH_LONG).show();
-        }
-        if (adresa == null || adresa.length() == 0 || adresa.length() < 2) {
-            flag = true;
-            Toast.makeText(this, "Adresa smund te jete bosh",
-                    Toast.LENGTH_LONG).show();
-        }
-        if (personalNum == null || personalNum.length() == 0 || personalNum.length() < 2) {
-
-            Toast.makeText(this, "Numri personal smund te jete bosh",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        if (phone == null || phone.length() == 0 || phone.length() < 10) {
-            flag = true;
-            Toast.makeText(this, "Tel smund te jete bosh",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-
-        }
-
-        return flag;
-    }
 }
