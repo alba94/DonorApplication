@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.enterprise.requests.DonorUpdateRequest;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -24,7 +26,7 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.email)
     EditText email;
 
-    @Bind(R.id.blood)
+    @Bind(R.id.bloodType)
     EditText gjaku;
 
     @Bind(R.id.birthday)
@@ -44,6 +46,10 @@ public class DetailActivity extends AppCompatActivity {
 
     @Bind(R.id.dhurim)
     Button add;
+    private final static String NameExtra = "NameExtra";
+    private final static String BloodExtra = "BloodExtra";
+    private final static String CityExtra = "CelExtra";
+    private final static String BundleExtra = "BundleExtra";
 
 
     @Override
@@ -52,6 +58,12 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         changeComponents(false);
+
+
+        Bundle extra = getIntent().getBundleExtra(BundleExtra);
+        emri.setText(extra.getString(NameExtra));
+        gjaku.setText(extra.getString(BloodExtra));
+        qyteti.setText(extra.getString(CityExtra));
 
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -101,9 +113,33 @@ public class DetailActivity extends AppCompatActivity {
             telefon.setEnabled(true);
             personalNum.setEnabled(false);
 
+            saveDonorData();
+
 
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void saveDonorData() {
+        DonorUpdateRequest donor = new DonorUpdateRequest();
+        String emri1 = emri.getText().toString();
+        donor.setName(emri1);
+        String mbiemri1 = mbiemri.getText().toString();
+        donor.setLastname(mbiemri1);
+        String email1 = email.getText().toString();
+        donor.setEmail(email1);
+        String gjaku1 = gjaku.getText().toString();
+        donor.setBllodtype(gjaku1);
+        String adresa1 = adresa.getText().toString();
+        donor.setAddress(adresa1);
+        String telefon1 = telefon.getText().toString();
+        donor.setPhonenumber(telefon1);
+        String personalNum1 = personalNum.getText().toString();
+        donor.setPersonalnumber(personalNum1);
+
+       /* DonationService.editDonor(donor); */
+
+    }
+
 
 }

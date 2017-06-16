@@ -41,7 +41,7 @@
             android:layout_marginTop="7dp"
             android:ems="10"
             android:hint="@string/emer"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapWords" />
 
         <EditText
             android:id="@+id/lastname"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="@string/mbiemer"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapWords" />
 
         <EditText
             android:id="@+id/username"
@@ -59,7 +59,7 @@
             android:layout_marginBottom="12dp"
             android:ems="10"
             android:hint="@string/usernamee"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapWords" />
 
         <EditText
             android:id="@+id/password"

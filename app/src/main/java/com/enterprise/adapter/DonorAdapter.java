@@ -58,7 +58,7 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
     @Override
     public void onBindViewHolder(DonorHolder holder, int position) {
         Donor item = quest.get(position);
-        holder.title.setText(item.getName());
+        holder.name.setText(item.getName());
         holder.city.setText(item.getCity().getName());
         holder.blood.setText(item.getBllodtype());
 
@@ -71,7 +71,7 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
 
     class DonorHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title;
+        TextView name;
         TextView city;
         TextView blood;
         View container;
@@ -79,7 +79,7 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
         public DonorHolder(View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.hai);
+            name = (TextView) itemView.findViewById(R.id.hai);
             blood = (TextView) itemView.findViewById(R.id.grupi_gjakut);
             city = (TextView) itemView.findViewById(R.id.qyteti);
             container = itemView.findViewById(R.id.cont);

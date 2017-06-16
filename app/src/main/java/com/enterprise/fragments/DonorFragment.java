@@ -16,7 +16,10 @@ import com.enterprise.activities.AddDonor;
 import com.enterprise.activities.DetailActivity;
 import com.enterprise.activities.R;
 import com.enterprise.adapter.DonorAdapter;
+import com.enterprise.responses.Donor;
 import com.enterprise.services.DonorService;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +33,12 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     SearchView search;
 
     public DonorAdapter adapter;
+    List<Donor> list;
+
+    private final static String NameExtra = "NameExtra";
+    private final static String BloodExtra = "BloodExtra";
+    private final static String CityExtra = "CelExtra";
+    private final static String BundleExtra = "BundleExtra";
 
 
     @Override
@@ -37,9 +46,12 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.activity_question_lists, container, false);
         ButterKnife.bind(this, rootview);
+
+        list = DonorService.getAllDonors();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setNestedScrollingEnabled(true);
-        adapter = new DonorAdapter(DonorService.getAllDonors(), getActivity());
+        adapter = new DonorAdapter(list, getActivity());
         recyclerView.setAdapter(adapter);
         adapter.setItemClickCallback(this);
 
@@ -60,7 +72,6 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
         });
 
 
-
         FloatingActionButton fab = (FloatingActionButton) rootview.findViewById(R.id.floating_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +87,23 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     }
 
     @Override
+
     public void onItemClick(int p) {
+
+        Donor d = list.get(p);
         Intent intent = new Intent(getActivity(), DetailActivity.class);
+
+        Bundle extras = new Bundle();
+        extras.putString(NameExtra, d.getName());
+        extras.putString(BloodExtra, d.getBllodtype());
+        extras.putString(CityExtra, d.getCity().getName());
+
+
+        intent.putExtra(BundleExtra, extras);
         startActivity(intent);
 
     }
 
 }
+
+

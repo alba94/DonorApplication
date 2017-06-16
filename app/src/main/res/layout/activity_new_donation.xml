@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
-    android:layout_marginBottom="10dp"
     tools:context="com.enterprise.activities.NewDonation">
 
     <LinearLayout
@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/donor_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -22,21 +23,23 @@
             android:textSize="20sp" />
 
 
-        <Spinner
+        <EditText
             android:id="@+id/blood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:inputType="text">
 
-        </Spinner>
+        </EditText>
+
 
         <EditText
             android:id="@+id/actualdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:textColor="@color/navigationBarColor"
-            android:inputType="datetime" />
+            android:inputType="datetime"
+            android:textColor="@color/navigationBarColor" />
 
         <EditText
             android:id="@+id/nextdate"
@@ -44,7 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:inputType="date"
-            android:text="That date" />
+            android:text="LastDonationDate" />
+
 
     </LinearLayout>
 
@@ -54,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/button_style"
-        android:text="Ruaj"
+        android:text="@string/save"
         android:textColor="@color/colorWhite" />
 
 </RelativeLayout>

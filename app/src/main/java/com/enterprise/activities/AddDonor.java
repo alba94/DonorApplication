@@ -2,9 +2,15 @@ package com.enterprise.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.enterprise.requests.DonorCreateRequest;
+import com.enterprise.services.DonorService;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,13 +27,13 @@ public class AddDonor extends AppCompatActivity {
     EditText email;
 
     @Bind(R.id.txt_bloodType)
-    EditText gjaku;
+    AutoCompleteTextView gjaku;
 
-    @Bind(R.id.birthday)
+    @Bind(R.id.txt_birthday)
     EditText ditelindja;
 
     @Bind(R.id.txt_qyteti)
-    EditText qyteti;
+    AutoCompleteTextView qyteti;
 
     @Bind(R.id.txt_adresa)
     EditText adresa;
@@ -42,7 +48,7 @@ public class AddDonor extends AppCompatActivity {
     Button save;
 
     String t_ditelindja, t_emri, t_mbiemri, t_gjaku, t_qyteti, t_adresa, t_telefon, t_personal, t_email;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,30 +63,70 @@ public class AddDonor extends AppCompatActivity {
                 t_mbiemri = mbiemri.getText().toString();
                 t_gjaku = gjaku.getText().toString();
                 t_email = email.getText().toString();
-                t_ditelindja = ditelindja.getText().toString();
-                t_qyteti = qyteti.getText().toString();
                 t_adresa = adresa.getText().toString();
                 t_telefon = telefon.getText().toString();
                 t_personal = personalNum.getText().toString();
 
-                newDonor();
+                if (isTextBad(t_emri, t_mbiemri, t_telefon, t_email, t_adresa, t_personal)) {
+                    Toast.makeText(getApplicationContext(), "K", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    newDonor();
+                    Toast.makeText(getApplicationContext(), "Dhuruesi u krijua me sukses!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
     public void newDonor() {
-        /*Donor d1 = new Donor();
-        d1.setBirthday(t_ditelindja);
-        d1.setAddress(t_adresa);
-        d1.setBllodtype(t_gjaku);
-        d1.setEmail(t_email);
-        d1.setPhonenumber(t_telefon);
-        d1.setLastname(t_mbiemri);
-        d1.setName(t_emri);
-        d1.setPersonalnumber(t_personal);
-        d1.setCity(t_qyteti);
+        DonorCreateRequest donor = new DonorCreateRequest();
+        donor.setName(t_emri);
+        donor.setLastname(t_mbiemri);
+        donor.setBllodtype(t_gjaku);
+        donor.setEmail(t_email);
+        donor.setAddress(t_adresa);
+        donor.setPhonenumber(t_telefon);
+        donor.setPersonalnumber(t_personal);
+        DonorService.createDonor(donor);
+    }
 
-        DonorCreateRequest(d1); */
+    public boolean isTextBad(String name, String lasname, String phone, String email, String adresa, String personalNum) {
+        boolean flag = false;
+        if (name == null || name.length() == 0 || name.length() < 2) {
+            flag = true;
+            Toast.makeText(this, "Emri smund te jete bosh",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (lasname == null || lasname.length() == 0 || lasname.length() < 2) {
+            flag = true;
+            Toast.makeText(this, "Mbiemri smund te jete bosh",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (adresa == null || adresa.length() == 0 || adresa.length() < 2) {
+            flag = true;
+            Toast.makeText(this, "Adresa smund te jete bosh",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (personalNum == null || personalNum.length() == 0 || personalNum.length() < 2) {
+
+            Toast.makeText(this, "Numri personal smund te jete bosh",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        if (phone == null || phone.length() == 0 || phone.length() < 10) {
+            flag = true;
+            Toast.makeText(this, "Tel smund te jete bosh",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
+        }
+
+        return flag;
     }
 }

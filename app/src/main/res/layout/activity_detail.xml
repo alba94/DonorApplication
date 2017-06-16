@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
             android:hint="@string/emer"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapWords" />
 
         <EditText
             android:id="@+id/mbiemri"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
             android:hint="@string/mbiemer"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapWords" />
 
         <EditText
             android:id="@+id/email"
@@ -72,7 +72,7 @@
             android:drawableLeft="@drawable/ic_location_city_black_24dp"
             android:drawablePadding="10dp"
             android:hint="@string/qyteti"
-            android:inputType="date" />
+            android:inputType="text|textCapWords" />
 
         <EditText
             android:id="@+id/adresa"
@@ -82,7 +82,7 @@
             android:drawableLeft="@drawable/ic_place_black_24dp"
             android:drawablePadding="10dp"
             android:hint="@string/adresa"
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine|textCapWords" />
 
         <EditText
             android:id="@+id/tel"
@@ -92,7 +92,7 @@
             android:drawableLeft="@drawable/ic_phone_android_black_24dp"
             android:drawablePadding="10dp"
             android:hint="@string/telefon"
-            android:inputType="date" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/personalNum"
@@ -101,7 +101,7 @@
             android:drawableLeft="@drawable/ic_credit_card_black_24dp"
             android:drawablePadding="10dp"
             android:hint="@string/personal_num"
-            android:inputType="date" />
+            android:inputType="text|number" />
     </LinearLayout>
 
 
