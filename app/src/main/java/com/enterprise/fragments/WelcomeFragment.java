@@ -31,6 +31,8 @@ public class WelcomeFragment extends Fragment {
     private float[] data = {25.3f, 22.4f, 21.4f, 20.5f, 50.5f, 9.5f, 3.5f, 5.5f};
     private String[] words = {"A+", "A-", "AB+", "AB-", "B+", "B-", "0+", "0-"};
 
+    private String[] month = {"Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nentor", "Dhjetor"};
+
     @Bind(R.id.pie_chart)
     PieChart pie;
 

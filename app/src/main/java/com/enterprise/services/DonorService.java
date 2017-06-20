@@ -8,6 +8,7 @@ import com.enterprise.Utils.Util;
 import com.enterprise.requests.DonorCreateRequest;
 import com.enterprise.requests.DonorSearchFilterRequest;
 import com.enterprise.responses.Donor;
+import com.enterprise.responses.DonorDonation;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -55,6 +56,24 @@ public class DonorService {
                 @Override
                 protected Donor doInBackground(Boolean... booleen) {
                     Donor donor = restTemplate.getForObject(ConfigValues.BASE_URL + "/donor/{id}", Donor.class, id);
+                    return donor;
+                }
+            }.execute().get();
+        } catch (InterruptedException e) {
+            Log.d("Error loading", e.getMessage());
+        } catch (ExecutionException e) {
+            Log.d("Error loading", e.getMessage());
+        }
+        return null;
+    }
+
+
+    public static DonorDonation getDonorByPersonalNumber(final String personalNumber) {
+        try {
+            return new AsyncTask<Boolean, Boolean, DonorDonation>() {
+                @Override
+                protected DonorDonation doInBackground(Boolean... booleen) {
+                    DonorDonation donor = restTemplate.getForObject(ConfigValues.BASE_URL + "/donorDonation/{personalNumber}", DonorDonation.class, personalNumber);
                     return donor;
                 }
             }.execute().get();

@@ -1,19 +1,25 @@
 package com.enterprise.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by dlika on 6/16/2017.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SessionObject {
 
     private Token token;
+
+    private User user;
+
+    public SessionObject() {
+    }
 
     public SessionObject(Token token, User user) {
         this.token = token;
         this.user = user;
     }
-
-    private User user;
 
     public User getUser() {
         return user;

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.enterprise.requests.LoginRequest;
 import com.enterprise.services.AccountService;
 
 import java.io.IOException;
@@ -107,34 +108,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean th) {
-
             if (th) {
                 nDialog.dismiss();
-                nDialog = new ProgressDialog(MainActivity.this);
-                nDialog.setTitle("Contacting Servers");
-                nDialog.setMessage("Logging in ...");
-                nDialog.setIndeterminate(false);
-                nDialog.setCancelable(true);
-                nDialog.show();
-                String username = _usernameText.getText().toString();
-                String password = _passwordText.getText().toString();
-                if (accountService.login(username, password)) {
-                    nDialog.setMessage("Loading User Space");
-                    nDialog.setTitle("Getting Data");
-                    Intent upanel = new Intent(getApplicationContext(), LoginedActivity.class);
-                    upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    nDialog.dismiss();
-                    startActivity(upanel);
-                    finish();
-                } else {
-                    nDialog.dismiss();
-                    Toast.makeText(getApplication(), "Incorrect Username/Password", Toast.LENGTH_SHORT).show();
-                }
+                new ProcessLogin().execute();
             } else {
                 nDialog.dismiss();
                 Toast.makeText(getApplication(), "Error in Network Connection", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
 
@@ -142,14 +124,12 @@ public class MainActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        String username, password;
+        LoginRequest loginRequest;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            username = _usernameText.getText().toString();
-            password = _passwordText.getText().toString();
-
+            loginRequest = new LoginRequest(_usernameText.getText().toString(), _passwordText.getText().toString());
             pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setTitle("Contacting Servers");
             pDialog.setMessage("Logging in ...");
@@ -160,8 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... args) {
-
-            return accountService.login(username, password);
+            return accountService.login(loginRequest);
         }
 
         @Override

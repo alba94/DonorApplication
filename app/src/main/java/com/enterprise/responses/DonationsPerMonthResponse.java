@@ -1,30 +1,41 @@
 package com.enterprise.responses;
 
-import java.util.Date;
-
 /**
  * Created by dlika on 6/2/2017.
  */
 
 public class DonationsPerMonthResponse {
 
-    private long donationsNumber;
+    private long numberOfDonors;
 
-    private Date dateMonth;
+    private Integer mounth;
 
-    public long getDonationsNumber() {
-        return donationsNumber;
+    public DonationsPerMonthResponse(long numberOfDonors, Integer mounth) {
+        super();
+        this.numberOfDonors = numberOfDonors;
+        this.mounth = mounth;
     }
 
-    public void setDonationsNumber(long donationsNumber) {
-        this.donationsNumber = donationsNumber;
+
+    public long getNumberOfDonors() {
+        return numberOfDonors;
     }
 
-    public Date getDateMonth() {
-        return dateMonth;
+    public void setNumberOfDonors(long numberOfDonors) {
+        this.numberOfDonors = numberOfDonors;
     }
 
-    public void setDateMonth(Date dateMonth) {
-        this.dateMonth = dateMonth;
+    public Integer getMounth() {
+        return mounth;
+    }
+
+    public void setMounth(Integer mounth) {
+        this.mounth = mounth;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DonationsPerMonthResponse [numberOfDonors=" + numberOfDonors + ", mounth=" + mounth + "]";
     }
 }

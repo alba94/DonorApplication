@@ -40,6 +40,12 @@ public class Util {
         return headers;
     }
 
+    public static MultiValueMap getContentHeaders() {
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+        headers.add("Content-Type", "application/json");
+        return headers;
+    }
+
     public static boolean checkForNet(final Context context) {
         try {
             return new AsyncTask<String, String, Boolean>() {
