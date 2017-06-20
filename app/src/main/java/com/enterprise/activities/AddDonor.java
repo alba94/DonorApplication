@@ -102,8 +102,8 @@ public class AddDonor extends AppCompatActivity {
             e.printStackTrace();
         }
         donor.setBirthday(date);
-        int id =this.getResources().getIdentifier(t_qyteti,"string",this.getPackageName());
-        donor.setCityId(id);
+        int cityId = db.getCityId(t_qyteti);
+        donor.setCityId(cityId);
         DonorService.createDonor(donor);
     }
 
@@ -117,6 +117,7 @@ public class AddDonor extends AppCompatActivity {
         t_personal = personalNum.getText().toString();
         t_ditelindja = ditelindja.getText().toString();
         t_qyteti = qyteti.getText().toString();
+
 
         if (t_emri.equals("") && t_mbiemri.equals("") && t_email.equals("") && t_gjaku.equals("") && t_adresa.equals("") && t_telefon.equals("") && t_personal.equals("")) {
             Toast.makeText(getApplicationContext(), getString(R.string.error_empty_field), Toast.LENGTH_LONG).show();

@@ -9,8 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.enterprise.requests.DonorUpdateRequest;
+import com.enterprise.responses.DonorDonation;
+import com.enterprise.services.DonorService;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,14 +52,11 @@ public class DetailActivity extends AppCompatActivity {
 
     @Bind(R.id.dhurim)
     Button add;
-    private final static String NameExtra = "NameExtra";
-    private final static String LastNameExtra = "LastNameExtra";
-    private final static String EmailExtra = "EmailExtra";
-    private final static String BloodExtra = "BloodExtra";
-    private final static String BirthdayExtra = "BirthdayExtra";
-    private final static String CityExtra = "CelExtra";
-    private final static String AddressExtra = "AddressExtra";
-    private final static String PhoneExtra = "PhoneExtra";
+
+    DonorDonation donor;
+
+    boolean action = true;
+
     private final static String NumriPersonalExtra = "NumriPersonalExtra";
     private final static String BundleExtra = "BundleExtra";
 
@@ -63,29 +66,46 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
+        initComponents();
         changeComponents(false);
-
-
-        Bundle extra = getIntent().getBundleExtra(BundleExtra);
-        emri.setText(extra.getString(NameExtra));
-        mbiemri.setText(extra.getString(LastNameExtra));
-        email.setText(extra.getString(EmailExtra));
-        gjaku.setText(extra.getString(BloodExtra));
-        qyteti.setText(extra.getString(CityExtra));
-        adresa.setText(extra.getString(AddressExtra));
-        telefon.setText(extra.getString(PhoneExtra));
-        personalNum.setText(extra.getString(NumriPersonalExtra));
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this, NewDonation.class);
-                startActivity(intent);
+                if (hasDonated()) {
+                    Toast.makeText(getApplicationContext(), "Nuk lejohet dhurimi pasi duhet 6 muaj", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(DetailActivity.this, NewDonation.class);
+                    startActivity(intent);
+                }
             }
         });
 
 
     }
+
+    public boolean hasDonated() {
+        Date date = this.donor.getLatestDonatedDate();
+        if (date != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -6);
+            Date beforesix = cal.getTime();
+            return date.after(beforesix);
+        }
+        return false;
+    }
+
+
+    public void initComponents() {
+        Bundle extra = getIntent().getBundleExtra(BundleExtra);
+        donor = DonorService.getDonorByPersonalNumber(extra.getString(NumriPersonalExtra));
+        if (donor != null && donor.getDonor() != null) {
+            emri.setText(donor.getDonor().getName());
+            mbiemri.setText(donor.getDonor().getLastname());
+            email.setText(donor.getDonor().getEmail());
+        }
+    }
+
+
 
     private void changeComponents(boolean value) {
         emri.setEnabled(value);
@@ -106,7 +126,6 @@ public class DetailActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    boolean action = true;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

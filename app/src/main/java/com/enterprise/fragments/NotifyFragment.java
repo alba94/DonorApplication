@@ -37,6 +37,7 @@ public class NotifyFragment extends Fragment {
 
     LoginService loginService;
 
+
     DBHelper db;
     List<String> cities;
 
@@ -50,12 +51,13 @@ public class NotifyFragment extends Fragment {
         final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
         ButterKnife.bind(this, rootview);
         loginService = new LoginService(getActivity());
-        /*db = new DBHelper(getActivity());
-        cities = db.getCity(); */
+
+        db = new DBHelper(getActivity());
+        cities = db.getCity();
 
 
         //Spinner 1
-      /*  ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, cities);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         city_sp.setAdapter(adapter);
         city_sp.setSelection(0, false);
@@ -75,7 +77,7 @@ public class NotifyFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        }); */
+        });
 
         //Spinner 2
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(), R.array.blood_array, android.R.layout.simple_spinner_item);
@@ -104,14 +106,14 @@ public class NotifyFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
 
-               /* if(DonationAccess.notifyArea(city_value,blood_value,loginUtil.getToken()))
-                {
-                    Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(getActivity(), "A problem occurred,try again!", Toast.LENGTH_LONG).show();
-                } */
+//               if(DonationAccess.notifyArea(city_value,blood_value,loginUtil.getToken()))
+//                {
+//                    Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
+//                }
+//                else
+//                {
+//                    Toast.makeText(getActivity(), "A problem occurred,try again!", Toast.LENGTH_LONG).show();
+//                }
             }
         });
 

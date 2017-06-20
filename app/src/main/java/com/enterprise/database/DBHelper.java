@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.enterprise.responses.City;
 import com.enterprise.services.DataService;
@@ -32,59 +33,63 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String BloodKEY_ID = "ID";
     private static final String BloodKEY_NAME = "NAME";
 
-    private SQLiteDatabase db;
-
-
     public DBHelper(Context context) {
         super(context, DbName, null, Db_version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + BloodType + " (" + BloodKEY_ID + " INTEGER PRIMARY KEY " + BloodKEY_NAME + " TEXT" + ")");
-        db.execSQL("CREATE TABLE " + CITIES + " (" + KEY_ID + " INTEGER PRIMARY KEY " + KEY_NAME + " TEXT " + KEY_VALIDITY + " INTEGER" + ")");
-
-
+        db.execSQL("DROP TABLE IF EXISTS " + BloodType);
+        db.execSQL("DROP TABLE IF EXISTS " + CITIES);
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + BloodType + " (" + BloodKEY_ID + " INTEGER PRIMARY KEY, " + BloodKEY_NAME + " TEXT" + " )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + CITIES + " (" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_VALIDITY + " INTEGER " + ")");
+        initCities(db);
+        Log.i("lallala", "Hello");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + BloodType);
-        db.execSQL("DROP TABLE IF EXISTS " + CITIES);
         onCreate(db);
-
     }
 
-    public List<City> displayCities() {
-        db = this.getWritableDatabase();
+    private void initCities(SQLiteDatabase db) {
         List<City> listaQyteteve = DataService.getAllCities();
         ContentValues ct = new ContentValues();
-        assert listaQyteteve != null;
         for (City city : listaQyteteve) {
             ct.put(KEY_ID, city.getIdcity());
             ct.put(KEY_NAME, city.getName());
             ct.put(KEY_VALIDITY, city.getValidity());
             db.insert(CITIES, null, ct);
-
         }
-
-        return listaQyteteve;
-
+        Log.i("LISTA Qytet ", "" + listaQyteteve.size());
     }
 
     public List<String> getCity() {
         List<String> list = new ArrayList<>();
-        db = this.getReadableDatabase();
         String query = "SELECT name FROM " + CITIES;
-        Cursor res = db.rawQuery(query, null);
+        Cursor res = this.getReadableDatabase().rawQuery(query, null);
         if (res.moveToFirst()) {
             do {
                 list.add(res.getString(res.getColumnIndex("name")));
             } while (res.moveToNext());
         }
-        db.close();
+        this.close();
         res.close();
+
+        Log.i("LISTA ME TE DHENAT ", "" + list.size());
         return list;
+    }
+
+    public int getCityId(String name) {
+        String query = "SELECT id FROM " + CITIES + " where name=?";
+        Cursor res = this.getReadableDatabase().rawQuery(query, new String[]{name});
+        int id = 0;
+        if (res.moveToFirst()) {
+            id = res.getInt(res.getColumnIndex("id"));
+        }
+        this.close();
+        res.close();
+        return id;
     }
 
 

@@ -35,14 +35,6 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     public DonorAdapter adapter;
     List<Donor> list;
 
-    private final static String NameExtra = "NameExtra";
-    private final static String LastNameExtra = "LastNameExtra";
-    private final static String EmailExtra = "EmailExtra";
-    private final static String BloodExtra = "BloodExtra";
-    private final static String BirthdayExtra = "BirthdayExtra";
-    private final static String CityExtra = "CelExtra";
-    private final static String AddressExtra = "AddressExtra";
-    private final static String PhoneExtra = "PhoneExtra";
     private final static String NumriPersonalExtra = "NumriPersonalExtra";
     private final static String BundleExtra = "BundleExtra";
 
@@ -99,13 +91,6 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
         Donor d = list.get(p);
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         Bundle extras = new Bundle();
-        extras.putString(NameExtra, d.getName());
-        extras.putString(LastNameExtra, d.getLastname());
-        extras.putString(EmailExtra, d.getEmail());
-        extras.putString(BloodExtra, d.getBllodtype());
-        extras.putString(CityExtra, d.getCity().getName());
-        extras.putString(AddressExtra, d.getAddress());
-        extras.putString(PhoneExtra, d.getPhonenumber());
         extras.putString(NumriPersonalExtra, d.getPersonalnumber());
         intent.putExtra(BundleExtra, extras);
         startActivity(intent);
