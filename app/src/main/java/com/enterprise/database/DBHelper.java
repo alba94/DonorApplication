@@ -2,12 +2,14 @@ package com.enterprise.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.enterprise.responses.City;
 import com.enterprise.services.DataService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,14 +20,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static int Db_version = 1;
     private static final String DbName = "city.db";
+
     private static final String CITIES = "cities";
-    private static final String BloodType = "bloodType";
+
     private static final String KEY_NAME = "name";
     private static final String KEY_ID = "id";
     private static final String KEY_VALIDITY = "validity";
 
+    private static final String BloodType = "bloodType";
 
-    public SQLiteDatabase mydb;
+    private static final String BloodKEY_ID = "ID";
+    private static final String BloodKEY_NAME = "NAME";
+
+    private SQLiteDatabase db;
+
 
     public DBHelper(Context context) {
         super(context, DbName, null, Db_version);
@@ -33,8 +41,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + BloodType + "(" + KEY_ID + "INTEGER PRIMARY KEY" + KEY_NAME + "TEXT" + ")");
-        db.execSQL("CREATE TABLE " + CITIES + "(" + KEY_ID + "INTEGER PRIMARY KEY" + KEY_NAME + "TEXT" + KEY_VALIDITY + "INTEGER" + ")");
+        db.execSQL("CREATE TABLE " + BloodType + " (" + BloodKEY_ID + " INTEGER PRIMARY KEY " + BloodKEY_NAME + " TEXT" + ")");
+        db.execSQL("CREATE TABLE " + CITIES + " (" + KEY_ID + " INTEGER PRIMARY KEY " + KEY_NAME + " TEXT " + KEY_VALIDITY + " INTEGER" + ")");
 
 
     }
@@ -48,22 +56,35 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public List<City> displayCities() {
-
-        List<City> listaQyteteve= DataService.getAllCities();
-        City city = (City) listaQyteteve;
+        db = this.getWritableDatabase();
+        List<City> listaQyteteve = DataService.getAllCities();
         ContentValues ct = new ContentValues();
-        if(listaQyteteve!=null) {
+        assert listaQyteteve != null;
+        for (City city : listaQyteteve) {
+            ct.put(KEY_ID, city.getIdcity());
             ct.put(KEY_NAME, city.getName());
+            ct.put(KEY_VALIDITY, city.getValidity());
+            db.insert(CITIES, null, ct);
 
-            mydb.insert(CITIES, null, ct);
         }
+
         return listaQyteteve;
 
     }
 
-    public void getBloodType(String name) {
-
-
+    public List<String> getCity() {
+        List<String> list = new ArrayList<>();
+        db = this.getReadableDatabase();
+        String query = "SELECT name FROM " + CITIES;
+        Cursor res = db.rawQuery(query, null);
+        if (res.moveToFirst()) {
+            do {
+                list.add(res.getString(res.getColumnIndex("name")));
+            } while (res.moveToNext());
+        }
+        db.close();
+        res.close();
+        return list;
     }
 
 

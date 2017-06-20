@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.enterprise.requests.UserUpdateRequest;
+import com.enterprise.session.SessionManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +37,7 @@ public class EditProfile extends AppCompatActivity {
     Button ruaj_tedhenat;
 
     String emri, mbiemri, username1, fjalekalim, emaili;
+    SessionManager session;
 
 
     @Override
@@ -43,6 +45,10 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
+
+        session = new SessionManager(this.getApplicationContext());
+        String name = session.getUsername();
+        nameEditText.setText(name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

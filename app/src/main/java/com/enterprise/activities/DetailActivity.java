@@ -47,8 +47,14 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.dhurim)
     Button add;
     private final static String NameExtra = "NameExtra";
+    private final static String LastNameExtra = "LastNameExtra";
+    private final static String EmailExtra = "EmailExtra";
     private final static String BloodExtra = "BloodExtra";
+    private final static String BirthdayExtra = "BirthdayExtra";
     private final static String CityExtra = "CelExtra";
+    private final static String AddressExtra = "AddressExtra";
+    private final static String PhoneExtra = "PhoneExtra";
+    private final static String NumriPersonalExtra = "NumriPersonalExtra";
     private final static String BundleExtra = "BundleExtra";
 
 
@@ -62,9 +68,13 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle extra = getIntent().getBundleExtra(BundleExtra);
         emri.setText(extra.getString(NameExtra));
+        mbiemri.setText(extra.getString(LastNameExtra));
+        email.setText(extra.getString(EmailExtra));
         gjaku.setText(extra.getString(BloodExtra));
         qyteti.setText(extra.getString(CityExtra));
-
+        adresa.setText(extra.getString(AddressExtra));
+        telefon.setText(extra.getString(PhoneExtra));
+        personalNum.setText(extra.getString(NumriPersonalExtra));
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,24 +106,31 @@ public class DetailActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    boolean action = true;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
         if (id == R.id.edit) {
-            item.setIcon(R.drawable.ic_check_black_24dp);
-            emri.setEnabled(true);
-            mbiemri.setEnabled(true);
-            email.setEnabled(true);
-            gjaku.setEnabled(false);
-            ditelindja.setEnabled(false);
-            qyteti.setEnabled(true);
-            adresa.setEnabled(true);
-            telefon.setEnabled(true);
-            personalNum.setEnabled(false);
+            if (action) {
+                item.setIcon(R.drawable.ic_check_black_24dp);
+                emri.setEnabled(true);
+                mbiemri.setEnabled(true);
+                email.setEnabled(true);
+                gjaku.setEnabled(false);
+                ditelindja.setEnabled(false);
+                qyteti.setEnabled(true);
+                adresa.setEnabled(true);
+                telefon.setEnabled(true);
+                personalNum.setEnabled(false);
+                action = false;
+            } else {
 
-            saveDonorData();
+                saveDonorData();
+                action = true;
+            }
 
 
         }

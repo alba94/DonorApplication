@@ -35,6 +35,7 @@ public class NewDonation extends AppCompatActivity {
 
         String actualDate = DateFormat.getDateInstance().format(dt);
 
+
         this.actualDate.setText(actualDate);
         this.actualDate.setEnabled(false);
 

@@ -39,9 +39,7 @@
             android:id="@+id/spinner_city"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:prompt="@array/country_array" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -65,9 +63,7 @@
             android:id="@+id/spinner_blood"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:prompt="@array/blood_array" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

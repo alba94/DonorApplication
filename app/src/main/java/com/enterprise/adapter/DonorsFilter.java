@@ -32,7 +32,7 @@ public class DonorsFilter extends Filter {
             List<Donor> filteredDonors = new ArrayList<>();
             for (int i = 0; i < filterList.size(); i++) {
 
-                if (filterList.get(i).getName().toUpperCase().contains(constraint)) {
+                if (filterList.get(i).getName().toUpperCase().contains(constraint) || filterList.get(i).getBllodtype().toUpperCase().contains(constraint) || filterList.get(i).getCity().getName().toUpperCase().contains(constraint)) {
                     filteredDonors.add(filterList.get(i));
                 }
             }

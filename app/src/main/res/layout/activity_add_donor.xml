@@ -1,127 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="10dp"
+    android:layout_centerVertical="true"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:layout_marginTop="20dp"
     tools:context="com.enterprise.activities.AddDonor">
 
-
-    <LinearLayout
-        android:id="@+id/linear1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linear2"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/txt_emri"
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:hint="@string/emer"
-            android:inputType="textPersonName|textCapWords" />
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txt_mbiemri"
+
+            <EditText
+                android:id="@+id/txt_emri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/emer"
+                android:inputType="textPersonName|textCapWords" />
+
+
+            <EditText
+                android:id="@+id/txt_mbiemri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_person_pin_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/mbiemer"
+                android:inputType="textPersonName|textCapWords" />
+
+
+            <EditText
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/txt_bloodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_invert_colors_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/grup_gjaku"
+                android:inputType="textPersonName|textCapWords" />
+
+
+            <EditText
+                android:id="@+id/txt_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_today_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/ditelindja"
+                android:inputType="date" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/txt_qyteti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_location_city_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/qyteti"
+                android:inputType="text|textCapWords" />
+
+
+            <EditText
+                android:id="@+id/txt_adresa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_place_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/adresa"
+                android:inputType="textPersonName|textCapWords" />
+
+
+            <EditText
+                android:id="@+id/txt_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableLeft="@drawable/ic_phone_android_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/telefon"
+                android:inputType="number" />
+
+
+            <EditText
+                android:id="@+id/txt_personalNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_credit_card_black_24dp"
+                android:drawablePadding="10dp"
+                android:hint="@string/personal_num"
+                android:inputType="textPersonName" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:hint="@string/mbiemer"
-            android:inputType="textPersonName|textCapWords" />
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/linear1"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
-
-        <AutoCompleteTextView
-            android:id="@+id/txt_bloodType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_invert_colors_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/grup_gjaku"
-            android:inputType="textPersonName|textCapWords" />
-
-        <EditText
-            android:id="@+id/txt_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_today_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/ditelindja"
-            android:inputType="date" />
-
-        <AutoCompleteTextView
-            android:id="@+id/txt_qyteti"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_location_city_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/qyteti"
-            android:inputType="text|textCapWords" />
-
-        <EditText
-            android:id="@+id/txt_adresa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_place_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/adresa"
-            android:inputType="textMultiLine|textCapWords" />
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_style"
+                android:text="@string/save"
+                android:textColor="@color/colorWhite" />
 
 
-        <EditText
-            android:id="@+id/txt_tel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:drawableLeft="@drawable/ic_phone_android_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/telefon"
-            android:inputType="number" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/txt_personalNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_credit_card_black_24dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/personal_num"
-            android:inputType="text|number" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linear2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_style"
-            android:text="@string/save"
-            android:textColor="@color/colorWhite" />
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</ScrollView>
