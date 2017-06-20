@@ -21,7 +21,7 @@ import com.enterprise.fragments.DonorFragment;
 import com.enterprise.fragments.NotifyFragment;
 import com.enterprise.fragments.ScanFragment;
 import com.enterprise.fragments.WelcomeFragment;
-import com.enterprise.services.LoginService;
+import com.enterprise.services.AccountService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -43,7 +43,7 @@ public class LoginedActivity extends AppCompatActivity {
     @Bind(R.id.viewpager)
     ViewPager viewPager;
 
-    private LoginService loginService;
+    private AccountService accountService;
     private int[] tabIcons = {
             R.drawable.ic_home_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
@@ -58,9 +58,9 @@ public class LoginedActivity extends AppCompatActivity {
         setContentView(R.layout.logined);
         ButterKnife.bind(this);
 
-        loginService = new LoginService(getApplicationContext());
+        accountService = new AccountService(getApplicationContext());
 
-        if (!loginService.isLogined()) {
+        if (AccountService.getSessionObject() == null) {
             this.logoutUser();
         }
         setSupportActionBar(toolbar);
@@ -146,7 +146,7 @@ public class LoginedActivity extends AppCompatActivity {
     }
 
     public void logoutUser() {
-        loginService.logout();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Jeni i sigurt qe doni te dilni?")
                 .setCancelable(false)
@@ -154,6 +154,7 @@ public class LoginedActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(LoginedActivity.this, MainActivity.class);
                         startActivity(intent);
+                        accountService.logout();
                         finish();
                     }
                 })

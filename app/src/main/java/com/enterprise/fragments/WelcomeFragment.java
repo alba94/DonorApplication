@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enterprise.activities.R;
-import com.enterprise.session.SessionManager;
+import com.enterprise.services.AccountService;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -37,8 +37,8 @@ public class WelcomeFragment extends Fragment {
     @Bind(R.id.username)
     TextView tv_view;
 
+    AccountService accountService;
 
-    SessionManager session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,10 +47,9 @@ public class WelcomeFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
 
         ButterKnife.bind(this, rootview);
-        session = new SessionManager(this.getActivity());
-        String name = session.getUsername();
+        accountService = new AccountService(this.getContext());
+        String name = AccountService.getSessionObject().getUser().getName();
         tv_view.setText("Welcome " + name);
-
 
         pie.setRotationEnabled(false);
         pie.setHoleRadius(20f);

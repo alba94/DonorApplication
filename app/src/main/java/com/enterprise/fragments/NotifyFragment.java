@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.enterprise.activities.R;
-import com.enterprise.services.LoginService;
+import com.enterprise.services.AccountService;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,7 +32,7 @@ public class NotifyFragment extends Fragment {
 
     String city_value = "", blood_value = "";
 
-    LoginService loginService;
+    AccountService accountService;
 
 
 
@@ -44,7 +44,7 @@ public class NotifyFragment extends Fragment {
 
         final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
         ButterKnife.bind(this, rootview);
-        loginService = new LoginService(getActivity());
+        accountService = new AccountService(getActivity());
 
 
 

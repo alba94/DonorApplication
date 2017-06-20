@@ -48,17 +48,15 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public List<City> displayCities() {
-
         List<City> listaQyteteve= DataService.getAllCities();
-        City city = (City) listaQyteteve;
         ContentValues ct = new ContentValues();
-        if(listaQyteteve!=null) {
+        for (City city : listaQyteteve) {
             ct.put(KEY_NAME, city.getName());
-
+            ct.put(KEY_ID, city.getIdcity());
+            ct.put(KEY_VALIDITY, city.getValidity());
             mydb.insert(CITIES, null, ct);
         }
         return listaQyteteve;
-
     }
 
     public void getBloodType(String name) {

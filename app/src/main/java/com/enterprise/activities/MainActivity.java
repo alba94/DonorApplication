@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.services.LoginService;
+import com.enterprise.services.AccountService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.forgot_password)
     TextView forgot_pass;
 
-    LoginService loginService;
+    AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        loginService = new LoginService(getApplicationContext());
+        accountService = new AccountService(getApplicationContext());
 
-        if (loginService.isLogined()) {
+
+        if (AccountService.getSessionObject() != null) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
             startActivity(intent);
             finish();
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         _loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (validate()) {
+
                     new NetCheck().execute();
                 }
             }
@@ -108,7 +110,26 @@ public class MainActivity extends AppCompatActivity {
 
             if (th) {
                 nDialog.dismiss();
-                new ProcessLogin().execute();
+                nDialog = new ProgressDialog(MainActivity.this);
+                nDialog.setTitle("Contacting Servers");
+                nDialog.setMessage("Logging in ...");
+                nDialog.setIndeterminate(false);
+                nDialog.setCancelable(true);
+                nDialog.show();
+                String username = _usernameText.getText().toString();
+                String password = _passwordText.getText().toString();
+                if (accountService.login(username, password)) {
+                    nDialog.setMessage("Loading User Space");
+                    nDialog.setTitle("Getting Data");
+                    Intent upanel = new Intent(getApplicationContext(), LoginedActivity.class);
+                    upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    nDialog.dismiss();
+                    startActivity(upanel);
+                    finish();
+                } else {
+                    nDialog.dismiss();
+                    Toast.makeText(getApplication(), "Incorrect Username/Password", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 nDialog.dismiss();
                 Toast.makeText(getApplication(), "Error in Network Connection", Toast.LENGTH_SHORT).show();
@@ -126,10 +147,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
-            _usernameText = (EditText) findViewById(R.id.input_username);
-            _passwordText = (EditText) findViewById(R.id.input_password);
-
             username = _usernameText.getText().toString();
             password = _passwordText.getText().toString();
 
@@ -144,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
-            return loginService.login(username, password);
+            return accountService.login(username, password);
         }
 
         @Override
