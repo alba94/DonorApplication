@@ -109,7 +109,6 @@ public class DetailActivity extends AppCompatActivity {
             mbiemri.setText(donor.getDonor().getLastname());
             email.setText(donor.getDonor().getEmail());
             gjaku.setText(donor.getDonor().getBllodtype());
-            qyteti.setText(donor.getDonor().getCity().getName());
             adresa.setText(donor.getDonor().getAddress());
             telefon.setText(donor.getDonor().getPhonenumber());
 
@@ -174,9 +173,6 @@ public class DetailActivity extends AppCompatActivity {
         donor.setLastname(mbiemri1);
         String email1 = email.getText().toString();
         donor.setEmail(email1);
-        String qyteti1 = qyteti.getText().toString();
-        int cityId = db.getCityId(qyteti1);
-        donor.setCityId(cityId);
         String adresa1 = adresa.getText().toString();
         donor.setAddress(adresa1);
         String telefon1 = telefon.getText().toString();

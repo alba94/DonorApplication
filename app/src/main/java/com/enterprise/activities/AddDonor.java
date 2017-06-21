@@ -59,7 +59,7 @@ public class AddDonor extends AppCompatActivity {
 
     DBHelper db;
     List<String> cities;
-    List<String> bloody;
+
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -71,7 +71,7 @@ public class AddDonor extends AppCompatActivity {
 
         db = new DBHelper(getApplicationContext());
         cities = db.getCity();
-        bloody = db.getBloodType();
+
 
         ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, cities);
         qyteti.setThreshold(1);
