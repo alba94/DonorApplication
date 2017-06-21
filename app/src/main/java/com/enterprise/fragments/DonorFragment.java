@@ -1,10 +1,12 @@
 package com.enterprise.fragments;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -85,7 +87,6 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
     }
 
     @Override
-
     public void onItemClick(int p) {
 
         Donor d = list.get(p);
@@ -96,6 +97,33 @@ public class DonorFragment extends Fragment implements DonorAdapter.ItemClickCal
         startActivity(intent);
 
     }
+
+    @Override
+    public void onLongItemClick(int p) {
+        final Donor d = list.get(p);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setMessage("Jeni i sigurt qe doni ta fshini dhuruesin?")
+                .setCancelable(false)
+                .setPositiveButton("Po", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        DonorService.deleteDonor(d.getIdblooddonor());
+
+
+                    }
+                })
+                .setNegativeButton("Jo", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+    }
+
 
 }
 

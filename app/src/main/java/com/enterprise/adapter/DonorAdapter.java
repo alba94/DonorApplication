@@ -36,6 +36,8 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
     public interface ItemClickCallback {
         void onItemClick(int p);
 
+        void onLongItemClick(int p);
+
     }
 
     public void setItemClickCallback(final ItemClickCallback itemClickCallback) {
@@ -69,14 +71,14 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
         return quest.size();
     }
 
-    class DonorHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class DonorHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView name;
         TextView city;
         TextView blood;
         View container;
 
-        public DonorHolder(View itemView) {
+        public DonorHolder(final View itemView) {
             super(itemView);
 
             name = (TextView) itemView.findViewById(R.id.hai);
@@ -84,14 +86,24 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorHolder>
             city = (TextView) itemView.findViewById(R.id.qyteti);
             container = itemView.findViewById(R.id.cont);
             container.setOnClickListener(this);
+            container.setOnLongClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.cont)
+            if (v.getId() == R.id.cont) {
                 itemClickCallback.onItemClick(getAdapterPosition());
+
+            }
         }
 
+        @Override
+        public boolean onLongClick(View v) {
+            if (v.getId() == R.id.cont) {
+                itemClickCallback.onLongItemClick(getAdapterPosition());
+            }
+            return true;
+        }
     }
 }

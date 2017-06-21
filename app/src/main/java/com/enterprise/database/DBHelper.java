@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.enterprise.responses.City;
 import com.enterprise.services.DataService;
@@ -42,9 +41,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BloodType);
         db.execSQL("DROP TABLE IF EXISTS " + CITIES);
         db.execSQL("CREATE TABLE IF NOT EXISTS " + BloodType + " (" + BloodKEY_ID + " INTEGER PRIMARY KEY, " + BloodKEY_NAME + " TEXT" + " )");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(1,'A+')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(2,'A-')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(3,'B+')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(4,'B-')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(5,'0+')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(6,'0-')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(7,'AB+')");
+        db.execSQL("INSERT INTO " + BloodType + "(" + BloodKEY_ID + ", " + BloodKEY_NAME + ")  VALUES(8,'AB-')");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + CITIES + " (" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_VALIDITY + " INTEGER " + ")");
         initCities(db);
-        Log.i("lallala", "Hello");
     }
 
     @Override
@@ -61,7 +67,6 @@ public class DBHelper extends SQLiteOpenHelper {
             ct.put(KEY_VALIDITY, city.getValidity());
             db.insert(CITIES, null, ct);
         }
-        Log.i("LISTA Qytet ", "" + listaQyteteve.size());
     }
 
     public List<String> getCity() {
@@ -76,7 +81,6 @@ public class DBHelper extends SQLiteOpenHelper {
         this.close();
         res.close();
 
-        Log.i("LISTA ME TE DHENAT ", "" + list.size());
         return list;
     }
 
@@ -91,6 +95,27 @@ public class DBHelper extends SQLiteOpenHelper {
         res.close();
         return id;
     }
+
+
+    public List<String> getBloodType() {
+
+        List<String> bloodType = new ArrayList<>();
+        String query = "SELECT * FROM " + BloodType;
+        Cursor cursor = this.getReadableDatabase().rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                bloodType.add(cursor.getString(2));
+            } while (cursor.moveToNext());
+        }
+
+
+
+        this.close();
+        cursor.close();
+        return bloodType;
+    }
+
+
 
 
 }

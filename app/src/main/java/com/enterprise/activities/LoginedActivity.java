@@ -2,7 +2,6 @@ package com.enterprise.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,7 +20,7 @@ import com.enterprise.fragments.DonorFragment;
 import com.enterprise.fragments.NotifyFragment;
 import com.enterprise.fragments.ScanFragment;
 import com.enterprise.fragments.WelcomeFragment;
-import com.enterprise.services.LoginService;
+import com.enterprise.services.AccountService;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -43,7 +42,7 @@ public class LoginedActivity extends AppCompatActivity {
     @Bind(R.id.viewpager)
     ViewPager viewPager;
 
-    private LoginService loginService;
+    private AccountService accountService;
     private int[] tabIcons = {
             R.drawable.ic_home_black_24dp,
             R.drawable.ic_stay_primary_landscape_black_24dp,
@@ -58,11 +57,9 @@ public class LoginedActivity extends AppCompatActivity {
         setContentView(R.layout.logined);
         ButterKnife.bind(this);
 
-        loginService = new LoginService(getApplicationContext());
+        accountService = new AccountService(getApplicationContext());
+        verifyLogin();
 
-        if (!loginService.isLogined()) {
-            this.logoutUser();
-        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setupViewPager(viewPager);
@@ -70,6 +67,16 @@ public class LoginedActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
     }
+
+    private void verifyLogin(){
+        if (AccountService.getSessionObject()==null) {
+            accountService.logout();
+            Intent intent = new Intent(LoginedActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,20 +97,15 @@ public class LoginedActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
 
-        } else if (id == R.id.call) {
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:123456789"));
-            startActivity(intent);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setupTabIcons() {
-            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-            tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-            tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
 
     }
 
@@ -146,7 +148,7 @@ public class LoginedActivity extends AppCompatActivity {
     }
 
     public void logoutUser() {
-        loginService.logout();
+        accountService.logout();
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage("Jeni i sigurt qe doni te dilni?")
                 .setCancelable(false)

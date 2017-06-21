@@ -21,7 +21,7 @@
     <string name="mbiemer">Mbiemri</string>
     <string name="email">Email</string>
     <string name="grup_gjaku">Grupi Gjakut</string>
-    <string name="ditelindja">Ditelindja DD/MM/YY</string>
+    <string name="ditelindja">Ditelindja YYYY-MM-DD</string>
     <string name="qyteti">Qyteti</string>
     <string name="adresa">Adresa</string>
     <string name="telefon">Cel +355</string>

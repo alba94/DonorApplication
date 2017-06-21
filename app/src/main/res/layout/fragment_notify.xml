@@ -1,80 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center|bottom"
+    android:layout_centerVertical="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.enterprise.fragments.NotifyFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/blood_text"
-        android:textColor="@color/navigationBarColor"
-        android:textSize="18sp" />
 
-    <LinearLayout
-        android:id="@+id/linar1"
+    <ImageView
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:scaleType="fitXY"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/city_selection"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
-
-        <Spinner
-            android:id="@+id/spinner_city"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+        android:src="@drawable/image" />
 
     <LinearLayout
-        android:id="@+id/linar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/blood_type"
-            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:text="@string/blood_text"
+            android:textColor="@color/navigationBarColor"
             android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/spinner_blood"
+        <LinearLayout
+            android:id="@+id/linar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/city_selection"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinner_city"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/blood_type"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinner_blood"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_notify"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_style"
+            android:text="@string/notify"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_notify"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_style"
-        android:text="@string/notify"
-        android:textColor="@color/colorWhite" />
-
-</LinearLayout>
+</RelativeLayout>
 

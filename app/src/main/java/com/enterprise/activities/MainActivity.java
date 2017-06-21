@@ -11,10 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.enterprise.services.LoginService;
+import com.enterprise.requests.LoginRequest;
+import com.enterprise.services.AccountService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -35,11 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.btn_login)
     Button _loginButton;
-
-    @Bind(R.id.forgot_password)
-    TextView forgot_pass;
-
-    LoginService loginService;
+    AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        loginService = new LoginService(getApplicationContext());
+        accountService = new AccountService(getApplicationContext());
 
-        if (loginService.isLogined()) {
+        if (AccountService.getSessionObject()!=null) {
             Intent intent = new Intent(MainActivity.this, LoginedActivity.class);
             startActivity(intent);
             finish();
@@ -121,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        String username, password;
+        LoginRequest loginRequest;
 
         @Override
         protected void onPreExecute() {
@@ -130,8 +126,7 @@ public class MainActivity extends AppCompatActivity {
             _usernameText = (EditText) findViewById(R.id.input_username);
             _passwordText = (EditText) findViewById(R.id.input_password);
 
-            username = _usernameText.getText().toString();
-            password = _passwordText.getText().toString();
+            loginRequest = new LoginRequest(_usernameText.getText().toString(), _passwordText.getText().toString());
 
             pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setTitle("Contacting Servers");
@@ -144,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
-            return loginService.login(username, password);
+            return accountService.login(loginRequest);
         }
 
         @Override

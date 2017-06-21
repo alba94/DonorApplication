@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.enterprise.activities.R;
-import com.enterprise.session.SessionManager;
+import com.enterprise.responses.DonationsPerMonthResponse;
+import com.enterprise.services.DonorService;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -21,6 +21,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,17 +29,22 @@ import butterknife.ButterKnife;
 
 public class WelcomeFragment extends Fragment {
 
-    private float[] data = {25.3f, 22.4f, 21.4f, 20.5f, 50.5f, 9.5f, 3.5f, 5.5f};
-    private String[] words = {"A+", "A-", "AB+", "AB-", "B+", "B-", "0+", "0-"};
+    private long[] data = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    private String[] month = {"Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nentor", "Dhjetor"};
 
     @Bind(R.id.pie_chart)
     PieChart pie;
 
-    @Bind(R.id.username)
-    TextView tv_view;
 
+    private void init() {
+        List<DonationsPerMonthResponse> lista = DonorService.getStatistics();
+        for(DonationsPerMonthResponse donation:lista)
+        {
+            data[donation.getMounth()-1]=donation.getNumberOfDonors();
+        }
+    }
 
-    SessionManager session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,31 +53,22 @@ public class WelcomeFragment extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_welcome, container, false);
 
         ButterKnife.bind(this, rootview);
-        session = new SessionManager(this.getActivity());
-        String name = session.getUsername();
-        tv_view.setText("Welcome " + name);
+        init();
 
-
-        pie.setRotationEnabled(false);
+        pie.setRotationEnabled(true);
         pie.setHoleRadius(20f);
         pie.setTransparentCircleAlpha(0);
-        pie.setCenterText("Donors");
+        pie.setCenterText("");
         addDataSet(pie);
 
         pie.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 int pos1 = e.toString().indexOf("(sum):");
-                String sales = e.toString().substring(pos1 + 6);
+                int nrDhurimeve=(int)e.getY();
 
-                for (int i = 0; i < data.length; i++) {
-                    if ((data[i] == Float.parseFloat(sales))) {
-                        pos1 = i;
-                        break;
-                    }
-                }
-                String emplyee = words[pos1];
-                Toast.makeText(getActivity(), "emp " + emplyee + " sales " + sales, Toast.LENGTH_LONG).show();
+                String muaji = month[pos1];
+                Toast.makeText(getActivity(), "Muaji " + muaji + " Nr dhurimeve " + nrDhurimeve, Toast.LENGTH_LONG).show();
 
             }
 
@@ -87,19 +84,14 @@ public class WelcomeFragment extends Fragment {
 
     private void addDataSet(PieChart pie) {
         ArrayList<PieEntry> y = new ArrayList<>();
-        ArrayList<String> xi = new ArrayList<>();
-
+        PieEntry entry;
         for (int i = 0; i < data.length; i++) {
-            y.add(new PieEntry(data[i], i));
+            entry=new PieEntry(data[i],month[i]);
+            y.add(entry);
         }
 
-        for (int i = 0; i < words.length; i++) {
-            xi.add(words[i]);
-
-        }
-
-        PieDataSet pieData = new PieDataSet(y, "EMp");
-        pieData.setSliceSpace(2);
+        PieDataSet pieData = new PieDataSet(y, "Muaji");
+        pieData.setSliceSpace(4);
         pieData.setValueTextSize(12);
 
         ArrayList<Integer> colors = new ArrayList<>();
@@ -111,6 +103,10 @@ public class WelcomeFragment extends Fragment {
         colors.add(Color.CYAN);
         colors.add(Color.GREEN);
         colors.add(Color.WHITE);
+        colors.add(Color.BLACK);
+        colors.add(Color.LTGRAY);
+        colors.add(Color.BLUE);
+        colors.add(Color.GREEN);
 
         pieData.setColors(colors);
 

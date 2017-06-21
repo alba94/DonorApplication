@@ -10,11 +10,6 @@
         android:title="Profili"
         balloonberry:showAsAction="always" />
 
-    <item
-        android:id="@+id/call"
-        android:icon="@drawable/ic_phone_in_talk_black_24dp"
-        android:title="IntentCall"
-        balloonberry:showAsAction="always" />
 
     <item
         android:id="@+id/logout"

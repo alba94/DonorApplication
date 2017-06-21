@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.enterprise.database.DBHelper;
 import com.enterprise.requests.DonorUpdateRequest;
 import com.enterprise.responses.DonorDonation;
 import com.enterprise.services.DonorService;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -59,6 +62,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private final static String NumriPersonalExtra = "NumriPersonalExtra";
     private final static String BundleExtra = "BundleExtra";
+    DBHelper db;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
     @Override
@@ -67,12 +72,13 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         initComponents();
+        db = new DBHelper(getApplicationContext());
         changeComponents(false);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (hasDonated()) {
-                    Toast.makeText(getApplicationContext(), "Nuk lejohet dhurimi pasi duhet 6 muaj", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Nuk lejohet dhurimi!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(DetailActivity.this, NewDonation.class);
                     startActivity(intent);
@@ -102,9 +108,13 @@ public class DetailActivity extends AppCompatActivity {
             emri.setText(donor.getDonor().getName());
             mbiemri.setText(donor.getDonor().getLastname());
             email.setText(donor.getDonor().getEmail());
+            gjaku.setText(donor.getDonor().getBllodtype());
+            qyteti.setText(donor.getDonor().getCity().getName());
+            adresa.setText(donor.getDonor().getAddress());
+            telefon.setText(donor.getDonor().getPhonenumber());
+
         }
     }
-
 
 
     private void changeComponents(boolean value) {
@@ -164,16 +174,14 @@ public class DetailActivity extends AppCompatActivity {
         donor.setLastname(mbiemri1);
         String email1 = email.getText().toString();
         donor.setEmail(email1);
-        String gjaku1 = gjaku.getText().toString();
-        donor.setBllodtype(gjaku1);
+        String qyteti1 = qyteti.getText().toString();
+        int cityId = db.getCityId(qyteti1);
+        donor.setCityId(cityId);
         String adresa1 = adresa.getText().toString();
         donor.setAddress(adresa1);
         String telefon1 = telefon.getText().toString();
         donor.setPhonenumber(telefon1);
-        String personalNum1 = personalNum.getText().toString();
-        donor.setPersonalnumber(personalNum1);
-
-       /* DonationService.editDonor(donor); */
+        DonorService.updateDonor(this.donor.getDonor().getIdblooddonor(), donor);
 
     }
 

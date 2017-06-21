@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.enterprise.activities.R;
-import com.enterprise.services.LoginService;
+import com.enterprise.services.AccountService;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import butterknife.Bind;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class ScanFragment extends Fragment  {
 
-    LoginService loginService;
+    AccountService accountService;
 
     @Bind(R.id.button_scan)
     Button scanButton;
@@ -27,7 +27,7 @@ public class ScanFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_scan,container,false);
         ButterKnife.bind(this, rootview);
-        loginService = new LoginService(getActivity());
+        accountService = new AccountService(getActivity());
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override

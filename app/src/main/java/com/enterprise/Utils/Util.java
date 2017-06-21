@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
-import com.enterprise.session.SessionManager;
+import com.enterprise.services.AccountService;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,7 +58,7 @@ public class Util {
 
     public static MultiValueMap getHeaders() {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
-        headers.add("Authorization", Util.getAuthorizationHeaderForAccessToken(SessionManager.getToken()));
+        headers.add("Authorization", Util.getAuthorizationHeaderForAccessToken(AccountService.getSessionObject().getToken().getAccess_token()));
         headers.add("Content-Type", "application/json");
         return headers;
     }

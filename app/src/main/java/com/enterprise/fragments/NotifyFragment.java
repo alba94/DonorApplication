@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.enterprise.activities.R;
 import com.enterprise.database.DBHelper;
-import com.enterprise.services.LoginService;
+import com.enterprise.requests.AreaNotifyRequest;
+import com.enterprise.services.AccountService;
+import com.enterprise.services.DonationService;
 
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class NotifyFragment extends Fragment {
 
     String city_value = "", blood_value = "";
 
-    LoginService loginService;
+    AccountService accountService;
 
 
     DBHelper db;
@@ -50,7 +52,7 @@ public class NotifyFragment extends Fragment {
 
         final View rootview = inflater.inflate(R.layout.fragment_notify, container, false);
         ButterKnife.bind(this, rootview);
-        loginService = new LoginService(getActivity());
+        accountService = new AccountService(getActivity());
 
         db = new DBHelper(getActivity());
         cities = db.getCity();
@@ -104,16 +106,15 @@ public class NotifyFragment extends Fragment {
 
         msg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
+                AreaNotifyRequest areaNotifyRequest = new AreaNotifyRequest();
+                areaNotifyRequest.setCityName(city_value);
+                areaNotifyRequest.setBloodType(blood_value);
 
-//               if(DonationAccess.notifyArea(city_value,blood_value,loginUtil.getToken()))
-//                {
-//                    Toast.makeText(getActivity(), "Message sent", Toast.LENGTH_LONG).show();
-//                }
-//                else
-//                {
-//                    Toast.makeText(getActivity(), "A problem occurred,try again!", Toast.LENGTH_LONG).show();
-//                }
+                if (DonationService.notifyArea(areaNotifyRequest)) {
+                    Toast.makeText(getActivity(), "Mesazhi u dergua me sukses! ", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Ndodhi nje problem", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

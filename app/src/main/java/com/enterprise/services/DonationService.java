@@ -26,7 +26,7 @@ public class DonationService {
                 @Override
                 protected Donation doInBackground(Boolean... booleen) {
                     HttpEntity<DonationCreateRequest> requestEntity = new HttpEntity<DonationCreateRequest>(request, Util.getHeaders());
-                    Donation donation = restTemplate.postForObject(ConfigValues.BASE_URL + "/donations/", request, Donation.class);
+                    Donation donation = restTemplate.postForObject(ConfigValues.BASE_URL + "/donations/", requestEntity, Donation.class);
                     return donation;
                 }
             }.execute().get();
@@ -42,8 +42,21 @@ public class DonationService {
         return true;
     }
 
-    public boolean notifyArea(AreaNotifyRequest request) {
-
+    public static boolean notifyArea(final AreaNotifyRequest request) {
+        try {
+            return new AsyncTask<Boolean, Boolean, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Boolean... booleen) {
+                    HttpEntity<AreaNotifyRequest> requestEntity = new HttpEntity<AreaNotifyRequest>(request,Util.getHeaders());
+                    restTemplate.postForEntity(ConfigValues.BASE_URL + "/areaNotify/", requestEntity,Void.class);
+                    return true;
+                }
+            }.execute().get();
+        } catch (InterruptedException e) {
+            Log.d("Error loading", e.getMessage());
+        } catch (ExecutionException e) {
+            Log.d("Error loading", e.getMessage());
+        }
         return false;
     }
 

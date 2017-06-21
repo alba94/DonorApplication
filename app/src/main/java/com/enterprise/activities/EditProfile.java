@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.enterprise.requests.UserUpdateRequest;
-import com.enterprise.session.SessionManager;
+import com.enterprise.responses.User;
+import com.enterprise.services.AccountService;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,7 +38,8 @@ public class EditProfile extends AppCompatActivity {
     Button ruaj_tedhenat;
 
     String emri, mbiemri, username1, fjalekalim, emaili;
-    SessionManager session;
+
+    User user;
 
 
     @Override
@@ -45,22 +47,18 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
+        user = AccountService.getSessionObject().getUser();//USERI I LOGUAR
+        nameEditText.setText(user.getName());
+        lastnameEditText.setText(user.getSurname());
+        usernameEditText.setText(user.getUsername());
+        emailEditText.setText(user.getEmail());
 
-        session = new SessionManager(this.getApplicationContext());
-        String name = session.getUsername();
-        nameEditText.setText(name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        emri = nameEditText.getText().toString();
-        mbiemri = lastnameEditText.getText().toString();
-        username1 = usernameEditText.getText().toString();
-        fjalekalim = passwordEditText.getText().toString();
-        emaili = emailEditText.getText().toString();
 
 
         ruaj_tedhenat.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +72,18 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public void editProfile() {
-
-        UserUpdateRequest user = new UserUpdateRequest();
-        user.setName(emri);
-        user.setSurname(mbiemri);
-        user.setUsername(username1);
-        user.setPassword(fjalekalim);
-        user.setEmail(emaili);
-
+        emri = nameEditText.getText().toString();
+        mbiemri = lastnameEditText.getText().toString();
+        username1 = usernameEditText.getText().toString();
+        fjalekalim = passwordEditText.getText().toString();
+        emaili = emailEditText.getText().toString();
+        UserUpdateRequest user1 = new UserUpdateRequest();
+        user1.setName(emri);
+        user1.setSurname(mbiemri);
+        user1.setUsername(username1);
+        user1.setPassword(fjalekalim);
+        user1.setEmail(emaili);
+        AccountService.updateUser(user.getUserid(), user1);
 
     }
 
